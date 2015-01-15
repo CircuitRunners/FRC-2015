@@ -1,0 +1,10 @@
+/bin/
+/bin/
+
+.classpath
+*.properties
+build.xml
+*.jar
+*.class
+sysProps.xml
+.project
