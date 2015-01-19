@@ -1,43 +1,30 @@
-
 package org.usfirst.frc.team1002.robot;
 
+import org.usfirst.frc.team1002.robot.commands.DriveCartesian;
+import org.usfirst.frc.team1002.robot.commands.DrivePolar;
+import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
+import org.usfirst.frc.team1002.robot.subsystems.Driverstation;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1002.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 public class Robot extends IterativeRobot {
 
 	public static final Drivebase drivebase = new Drivebase();
+	public static final Driverstation driverstation = new Driverstation();
 	public static OI oi;
-	
-	RobotDrive rd;
-	
 
     Command autonomousCommand;
+    
+    Command drive;
+    Command driveC;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
-        
-        rd = new RobotDrive(0, 1, 2, 3);
+		drive = new DrivePolar();
+		driveC = new DriveCartesian();
     }
 	
 	public void disabledPeriodic() {
@@ -62,14 +49,16 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        //Scheduler.getInstance().add(drive);
+        Scheduler.getInstance().add(driveC);
+        
     }
 
     /**
      * This function is called when the disabled button is hit.
      * You can use it to reset subsystems before shutting down.
      */
-    public void disabledInit(){
-
+    public void disabledInit() {
     }
 
     /**
@@ -77,6 +66,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        if (RobotMap.stick.getRawButton(2)){
+        RobotMap.gyro.reset();}
     }
     
     /**

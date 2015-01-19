@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1002.robot;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Victor;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -21,8 +21,9 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	public static int leftFrontMotor = 0;
 	public static int rightFrontMotor = 1;
-	public static int leftBackMotor = 2;
-	public static int rightBackMotor = 3;
+	public static int rightBackMotor = 2;
+	public static int leftBackMotor = 3;
 
-	public static Joystick stick = new Joystick(1);
+	public static Joystick stick = new Joystick(0);
+	public static Gyro gyro = new Gyro(0); 
 }
