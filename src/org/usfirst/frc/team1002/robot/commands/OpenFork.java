@@ -1,9 +1,13 @@
 package org.usfirst.frc.team1002.robot.commands;
 
+import org.usfirst.frc.team1002.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *-------------------------------------------
+ *            Luka's Code
+ *-------------------------------------------
  */
 public class OpenFork extends Command {
 
@@ -18,6 +22,7 @@ public class OpenFork extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.flanges.enslaveRollers();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,6 +32,8 @@ public class OpenFork extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	// All Rollers are created equal
+    	Robot.flanges.emancipateRollers();
     }
 
     // Called when another command which requires one or more of the same

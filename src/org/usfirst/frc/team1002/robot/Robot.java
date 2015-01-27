@@ -4,6 +4,8 @@ import org.usfirst.frc.team1002.robot.commands.DriveCartesian;
 import org.usfirst.frc.team1002.robot.commands.DrivePolar;
 import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
 import org.usfirst.frc.team1002.robot.subsystems.Driverstation;
+import org.usfirst.frc.team1002.robot.subsystems.ForkRoller;
+import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,6 +16,8 @@ public class Robot extends IterativeRobot {
 
 	public static final Drivebase drivebase = new Drivebase();
 	public static final Driverstation driverstation = new Driverstation();
+	public static final Forklift forklift = new Forklift();
+	public static final ForkRoller flanges= new ForkRoller();
 	public static OI oi;
 
     Command autonomousCommand;

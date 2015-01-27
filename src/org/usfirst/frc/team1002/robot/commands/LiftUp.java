@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1002.robot.commands;
 
+import org.usfirst.frc.team1002.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +12,7 @@ public class LiftUp extends Command {
     public LiftUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.forklift);
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +21,7 @@ public class LiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.forklift.LiftUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,6 +31,7 @@ public class LiftUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.forklift.stopLift();
     }
 
     // Called when another command which requires one or more of the same

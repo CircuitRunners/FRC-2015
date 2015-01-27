@@ -22,7 +22,7 @@ public class Drivebase extends Subsystem {
     	leftFrontMotor = new Victor(RobotMap.leftFrontMotor);
     	rightFrontMotor = new Victor(RobotMap.rightFrontMotor);
     	leftBackMotor = new Victor(RobotMap.leftBackMotor);
-    	rightBackMotor = new Victor(RobotMap.rightBackMotor);	
+    	rightBackMotor = new Victor(RobotMap.rightBackMotor);
     	
     	rd = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
     	
