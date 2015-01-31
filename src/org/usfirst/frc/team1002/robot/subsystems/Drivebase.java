@@ -22,12 +22,14 @@ public class Drivebase extends Subsystem {
     
     RobotDrive rd;
     
+    final double spinDeadZoneConstant = 0.2;
+    
     public Drivebase() {
     	leftFrontMotor = new Victor(RobotMap.leftFrontMotor);
     	rightFrontMotor = new Victor(RobotMap.rightFrontMotor);
     	leftBackMotor = new Victor(RobotMap.leftBackMotor);
     	rightBackMotor = new Victor(RobotMap.rightBackMotor);
-    	dozer = new Encoder(0, 1);
+    	dozer = new Encoder(0, 1); //rip in pepperionis
     	
     	rd = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
     	
@@ -40,19 +42,30 @@ public class Drivebase extends Subsystem {
     }
     
     public void goCartesian(){
-    	rd.mecanumDrive_Cartesian(throttle(RobotMap.stick.getX()), throttle(RobotMap.stick.getY()), throttle(RobotMap.stick.getTwist()), -RobotMap.gyro.getAngle());
+    	rd.mecanumDrive_Cartesian(throttle(RobotMap.stick.getX()), throttle(RobotMap.stick.getY()), spinThrottle(RobotMap.stick.getTwist()), -RobotMap.gyro.getAngle());
     }
     
-    public double xXx_inputModifierm8__xXx(double input){
+    public double inputModifier(double input){
     	
-    	if (input > -0.1 && input < 0.1) {
+    	if (input > -0.2 && input < 0.2) {
     		input = 0;
     	}
-    	return (input * Math.abs(input) * (((-1 * RobotMap.stick.getThrottle()) + 1) / 2));
+    	return (input * Math.abs(input) * (((-RobotMap.stick.getThrottle()) + 1) / 2));
+    }
+    
+    public double spinModifier(double input){
+    	if(input > -spinDeadZoneConstant && input < spinDeadZoneConstant){
+    		input=0;
+    	}
+    	return (input * Math.abs(input) * (((-RobotMap.stick.getThrottle()) + 1) / 2));
     }
     
     public double throttle(double input){
-    	return xXx_inputModifierm8__xXx(input);
+    	return inputModifier(input);
+    }
+    
+    public double spinThrottle(double input){
+    	return spinModifier(input);
     }
     
     public void initDefaultCommand() {
@@ -60,6 +73,7 @@ public class Drivebase extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    //Fix this so it doesn't use delay. Delay is bad. wusu
     public void forward(double time) {
     	leftFrontMotor.set(1);
 		rightFrontMotor.set(1);

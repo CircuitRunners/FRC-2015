@@ -22,13 +22,13 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     
-    Command drive;
-    Command driveC;
+    Command drivePolar;
+    Command driveCartesian;
 
     public void robotInit() {
 		oi = new OI();
-		drive = new DrivePolar();
-		driveC = new DriveCartesian();
+		drivePolar = new DrivePolar();
+		driveCartesian = new DriveCartesian();
     }
 	
 	public void disabledPeriodic() {
@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         //Scheduler.getInstance().add(drive);
-        Scheduler.getInstance().add(drive);
+        Scheduler.getInstance().add(driveCartesian);
         
     }
 
@@ -73,6 +73,10 @@ public class Robot extends IterativeRobot {
         if (RobotMap.stick.getRawButton(2)){
         	RobotMap.gyro.reset();
         }
+        if(RobotMap.stick.getRawButton(11))
+        	Scheduler.getInstance().add(driveCartesian);
+        if(RobotMap.stick.getRawButton(12))
+        	Scheduler.getInstance().add(drivePolar);
     }
     
     /**

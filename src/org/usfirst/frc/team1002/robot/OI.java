@@ -39,18 +39,19 @@ public class OI {
 	
 	JoystickButton upButton = new JoystickButton(RobotMap.stick, 3);
 	JoystickButton downButton = new JoystickButton(RobotMap.stick, 4);
+	JoystickButton polarButton = new JoystickButton(RobotMap.stick, 1);
 	
 	public OI() {
 		if (!downButton.get()) {
 			upButton.whileHeld(new LiftUp());
 		}
 		
-		upButton.whenReleased(new LiftStop());
-		downButton.whenReleased(new LiftStop());
-		
 		if (!upButton.get()) {
 			downButton.whileHeld(new LiftDown());
 		}
+		
+		upButton.whenReleased(new LiftStop());
+		downButton.whenReleased(new LiftStop());
 	}
 	
 }
