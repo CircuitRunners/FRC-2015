@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1002.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team1002.robot.commands.*;
@@ -45,6 +44,9 @@ public class OI {
 		if (!downButton.get()) {
 			upButton.whileHeld(new LiftUp());
 		}
+		
+		upButton.whenReleased(new LiftStop());
+		downButton.whenReleased(new LiftStop());
 		
 		if (!upButton.get()) {
 			downButton.whileHeld(new LiftDown());

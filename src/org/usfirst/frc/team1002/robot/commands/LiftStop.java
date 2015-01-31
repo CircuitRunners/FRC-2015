@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftDown extends Command {
+public class LiftStop extends Command {
 
-    public LiftDown() {
+    public LiftStop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.forklift);
@@ -21,7 +21,7 @@ public class LiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.forklift.LiftDown();
+    	Robot.forklift.stopLift();
     }
 
     // Make this return true when this Command no longer needs to run execute()

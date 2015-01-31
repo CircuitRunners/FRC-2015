@@ -2,7 +2,7 @@ package org.usfirst.frc.team1002.robot.subsystems;
 
 import org.usfirst.frc.team1002.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,12 +12,13 @@ public class Forklift extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    Victor forkliftMotor;
+    CANTalon forkliftMotor;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	forkliftMotor = new Victor(RobotMap.forkliftMotor);
+    	forkliftMotor = new CANTalon(RobotMap.forkliftMotor);
+    	this.stopLift();
 
     }
     

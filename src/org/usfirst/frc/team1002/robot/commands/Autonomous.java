@@ -2,17 +2,18 @@ package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LiftDown extends Command {
+public class Autonomous extends Command {
 
-    public LiftDown() {
+    public Autonomous() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.forklift);
+    	requires(Robot.drivebase);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +22,7 @@ public class LiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.forklift.LiftDown();
+    	Robot.drivebase.forward(3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,12 +32,10 @@ public class LiftDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.forklift.stopLift();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.forklift.stopLift();
     }
 }

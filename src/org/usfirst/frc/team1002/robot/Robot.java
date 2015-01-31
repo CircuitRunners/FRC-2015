@@ -4,7 +4,7 @@ import org.usfirst.frc.team1002.robot.commands.DriveCartesian;
 import org.usfirst.frc.team1002.robot.commands.DrivePolar;
 import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
 import org.usfirst.frc.team1002.robot.subsystems.Driverstation;
-import org.usfirst.frc.team1002.robot.subsystems.ForkRoller;
+//import org.usfirst.frc.team1002.robot.subsystems.ForkRoller;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -17,7 +17,7 @@ public class Robot extends IterativeRobot {
 	public static final Drivebase drivebase = new Drivebase();
 	public static final Driverstation driverstation = new Driverstation();
 	public static final Forklift forklift = new Forklift();
-	public static final ForkRoller flanges= new ForkRoller();
+	//public static final ForkRoller roller = new ForkRoller();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         //Scheduler.getInstance().add(drive);
-        Scheduler.getInstance().add(driveC);
+        Scheduler.getInstance().add(drive);
         
     }
 
@@ -71,7 +71,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         if (RobotMap.stick.getRawButton(2)){
-        RobotMap.gyro.reset();}
+        	RobotMap.gyro.reset();
+        }
     }
     
     /**
