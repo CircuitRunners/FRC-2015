@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1002.robot;
 
-import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Joystick;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -10,26 +10,13 @@ import edu.wpi.first.wpilibj.Joystick;
  * floating around.
  */
 public class RobotMap {
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
-    
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
-	public static final int leftFrontMotor = 0;
-	public static final int rightFrontMotor = 1;
-	public static final int rightBackMotor = 2;
-	public static final int leftBackMotor = 3;
-	public static final int forkliftMotor = 0;
-	//public static int forkLeftRoller = 5;
-	//public static int forkRightRoller = 6;
+	// port mappings, List<Integer> for grouped modules and int for single modules
 
-	public static final Joystick stick = new Joystick(0);
-	public static final Gyro gyro = new Gyro(0);
-	
-	public static final int limitTop = 8;
-	
+	// motor ports
+	public static final List<Integer> motors = Arrays.asList(0, 1, 2, 3);
+	// joystick port
+	public static final int stick = 0;
+	// module ports
+	public static final int gyro = 0;
+	public static final List<Integer> limitSwitches = Arrays.asList(8, 9);
 }

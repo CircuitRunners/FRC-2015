@@ -2,6 +2,7 @@ package org.usfirst.frc.team1002.robot;
 
 import org.usfirst.frc.team1002.robot.commands.DriveCartesian;
 import org.usfirst.frc.team1002.robot.commands.DrivePolar;
+import org.usfirst.frc.team1002.robot.commands.LiftDown;
 import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
 import org.usfirst.frc.team1002.robot.subsystems.Driverstation;
 //import org.usfirst.frc.team1002.robot.subsystems.ForkRoller;
@@ -17,13 +18,14 @@ public class Robot extends IterativeRobot {
 	public static final Drivebase drivebase = new Drivebase();
 	public static final Driverstation driverstation = new Driverstation();
 	public static final Forklift forklift = new Forklift();
-	//public static final ForkRoller roller = new ForkRoller();
 	public static OI oi;
 
     Command autonomousCommand;
     
     Command drivePolar;
     Command driveCartesian;
+    
+
 
     public void robotInit() {
 		oi = new OI();
@@ -54,7 +56,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         //Scheduler.getInstance().add(drive);
-        Scheduler.getInstance().add(driveCartesian);
+        Scheduler.getInstance().add(drivePolar);
         
     }
 
@@ -70,13 +72,9 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        if (RobotMap.stick.getRawButton(2)){
-        	RobotMap.gyro.reset();
-        }
-        if(RobotMap.stick.getRawButton(11))
-        	Scheduler.getInstance().add(driveCartesian);
-        if(RobotMap.stick.getRawButton(12))
-        	Scheduler.getInstance().add(drivePolar);
+        if(RobotMap.stick.getRawButton(11)) Scheduler.getInstance().add(driveCartesian);
+        if(RobotMap.stick.getRawButton(12)) Scheduler.getInstance().add(drivePolar);
+        if(RobotMap.stick.getRawButton(2)) RobotMap.gyro.reset();
     }
     
     /**

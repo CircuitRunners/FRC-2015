@@ -21,6 +21,7 @@ public class Driverstation extends Subsystem {
     	SmartDashboard.putString("DB/String 4", ((Double) RobotMap.gyro.getAngle()).toString());
     	SmartDashboard.putString("DB/String 5", ((Double) RobotMap.stick.getThrottle()).toString());
     	SmartDashboard.putString("DB/String 6", ((Integer) Robot.drivebase.dozer.getRaw()).toString());
+    	SmartDashboard.putString("DB/String 7", ((Integer) RobotMap.stick.getPOV(0)).toString());
     }
 
     public void initDefaultCommand() {

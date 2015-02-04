@@ -37,9 +37,10 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	JoystickButton upButton = new JoystickButton(RobotMap.stick, 3);
+	JoystickButton upButton = new JoystickButton(RobotMap.stick, 6);
 	JoystickButton downButton = new JoystickButton(RobotMap.stick, 4);
 	JoystickButton polarButton = new JoystickButton(RobotMap.stick, 1);
+	
 	
 	public OI() {
 		if (!downButton.get()) {
