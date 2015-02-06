@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1002.robot;
 
-import org.usfirst.frc.team1002.robot.commands.DriveCartesian;
-import org.usfirst.frc.team1002.robot.commands.DrivePolar;
 import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
@@ -13,78 +11,97 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Robot extends IterativeRobot {
 
-	public static final Drivebase drivebase = new Drivebase();
-	public static final Forklift forklift = new Forklift();
-	public static final Joystick stick = new Joystick(RobotMap.stick);
-	public static OI oi;
+    // fundamental systems
+    public static final Drivebase drivebase = new Drivebase();
+    public static final Forklift forklift = new Forklift();
+    public static final Joystick stick = new Joystick(RobotMap.stick);
 
-	Command autonomousCommand;
+    // secondary handlers
+    public static OI oi;
 
-	Command drivePolar;
-	Command driveCartesian;
+    // should we use robot set inputs (true) or joystick inputs (false)?
+    public boolean robotControl = false;
 
-	@Override
-	public void robotInit() {
-		oi = new OI();
-		drivePolar = new DrivePolar();
-		driveCartesian = new DriveCartesian();
-	}
+    // robot set move values
+    public double X;
+    public double Y;
+    public double Rotation;
 
-	@Override
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    Command autonomousCommand;
 
-	@Override
-	public void autonomousInit() {
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}
-	}
+    @Override
+    public void robotInit() {
+        oi = new OI();
+    }
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    @Override
+    public void disabledPeriodic() {
+        Scheduler.getInstance().run();
+    }
 
-	@Override
-	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null) {
-			autonomousCommand.cancel();
-		}
-		// Scheduler.getInstance().add(drive);
-		Scheduler.getInstance().add(drivePolar);
-	}
+    @Override
+    public void autonomousInit() {
+        // schedule the autonomous command (example)
+        if (autonomousCommand != null) {
+            autonomousCommand.start();
+        }
+    }
 
-	/**
-	 * This function is called when the disabled button is hit. You can use it
-	 * to reset subsystems before shutting down.
-	 */
-	@Override
-	public void disabledInit() {
-	}
+    /**
+     * This function is called periodically during autonomous
+     */
+    @Override
+    public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
+        robotControl = true;
+        move();
+    }
 
-	/**
-	 * This function is called periodically during operator control
-	 */
-	@Override
-	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    @Override
+    public void teleopInit() {
+        // This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        if (autonomousCommand != null) {
+            autonomousCommand.cancel();
+        }
+    }
 
-	/**
-	 * This function is called periodically during test mode
-	 */
-	@Override
-	public void testPeriodic() {
-		LiveWindow.run();
-	}
+    /**
+     * This function is called when the disabled button is hit. You can use it
+     * to reset subsystems before shutting down.
+     */
+    @Override
+    public void disabledInit() {
+    }
+
+    /**
+     * This function is called periodically during operator control
+     */
+    @Override
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+        robotControl = false;
+        move();
+    }
+
+    /**
+     * This function is called periodically during test mode
+     */
+    @Override
+    public void testPeriodic() {
+        LiveWindow.run();
+    }
+
+    public void move() {
+        final double x = stick.getX();
+        final double y = stick.getY();
+        final double rotation = stick.getTwist();
+        if (robotControl) {
+            drivebase.move(X, Y, Rotation);
+        } else {
+            drivebase.move(x, y, rotation);
+        }
+    }
 }

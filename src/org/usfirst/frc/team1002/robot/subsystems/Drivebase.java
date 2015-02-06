@@ -13,65 +13,65 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivebase extends Subsystem {
-	Victor leftFrontMotor;
-	Victor rightFrontMotor;
-	Victor leftBackMotor;
-	Victor rightBackMotor;
+    Victor leftFrontMotor;
+    Victor rightFrontMotor;
+    Victor leftBackMotor;
+    Victor rightBackMotor;
 
-	Gyro gyro;
+    Gyro gyro;
 
-	Encoder encoder;
+    Encoder encoder;
 
-	RobotDrive rd;
+    RobotDrive robotDrive;
 
-	final double spinDeadZoneConstant = 0.3;
+    public boolean isPolar = true;
 
-	public Drivebase() {
-		// initialize motors
-		leftFrontMotor = new Victor(RobotMap.motors.get(0));
-		rightFrontMotor = new Victor(RobotMap.motors.get(1));
-		leftBackMotor = new Victor(RobotMap.motors.get(2));
-		rightBackMotor = new Victor(RobotMap.motors.get(3));
+    static final double spinDeadzoneConstant = 0.3;
+    static final double stickDeadzoneConstant = 0.1;
 
-		// initialize gyro
-		gyro = new Gyro(RobotMap.gyro);
+    public Drivebase() {
+        // initialize motors
+        leftFrontMotor = new Victor(RobotMap.motors.get(0));
+        rightFrontMotor = new Victor(RobotMap.motors.get(1));
+        leftBackMotor = new Victor(RobotMap.motors.get(2));
+        rightBackMotor = new Victor(RobotMap.motors.get(3));
 
-		// initialize encoder
-		encoder = new Encoder(0, 1);
-		rd = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor,
-				rightBackMotor);
+        // initialize gyro
+        gyro = new Gyro(RobotMap.gyro);
 
-		rd.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-		rd.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-	}
+        // initialize encoder
+        encoder = new Encoder(0, 1);
+        robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
-	public void goPolar() {
-		rd.mecanumDrive_Cartesian(Robot.stick.getX(), Robot.stick.getY(),
-				spinThrottle(Robot.stick.getTwist()), 0);
-	}
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+    }
 
-	public void goCartesian() {
-		rd.mecanumDrive_Cartesian(throttle(Robot.stick.getX()),
-				throttle(Robot.stick.getY()),
-				spinThrottle(Robot.stick.getTwist()), -gyro.getAngle());
-	}
+    public void move(double x, double y, double rotation) {
+        if (isPolar) {
+            robotDrive.mecanumDrive_Cartesian(throttle(x), throttle(y), spinThrottle(rotation), 0);
+        } else {
+            robotDrive.mecanumDrive_Cartesian(x, y, rotation, -gyro.getAngle());
+        }
+    }
 
-	public double throttle(double input) {
+    public double throttle(double input) {
+        if (input > -0.2 && input < 0.2) {
+            input = 0;
+        }
+        return Math.pow(input, 3) * ((-Robot.stick.getThrottle() + 1) / 2);
+    }
 
-		if (input > -0.2 && input < 0.2) {
-			input = 0;
-		}
-		return Math.pow(input, 3) * ((-Robot.stick.getThrottle() + 1) / 2);
-	}
+    public double spinThrottle(double input) {
+        if (input > -spinDeadzoneConstant && input < spinDeadzoneConstant) {
+            input = 0;
+        }
+        return Math.pow(input, 3) * ((-Robot.stick.getThrottle() + 1) / 2);
+    }
 
-	public double spinThrottle(double input) {
-		if (input > -spinDeadZoneConstant && input < spinDeadZoneConstant) {
-			input = 0;
-		}
-		return Math.pow(input, 3) * ((-Robot.stick.getThrottle() + 1) / 2);
-	}
-
-	@Override
-	public void initDefaultCommand() {
-	}
+    @Override
+    public void initDefaultCommand() {
+    }
 }
