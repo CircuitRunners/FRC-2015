@@ -10,7 +10,7 @@ public class RobotMap {
     // limit switches
     public static final int[] limitSwitches = { 8, 9 };
     // encoders
-    public static final int[][] encoders = { { 0, 1 }, { 2, 3 } };
+    public static final int[][] encoders = { { 0, 1 }, { 2, 3 }, { 4, 5 }, { 6, 7 } };
     // forklift motor
     public static final int forkliftMotor = 0;
 }

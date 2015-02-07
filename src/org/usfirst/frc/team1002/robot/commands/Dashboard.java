@@ -9,13 +9,13 @@ public class Dashboard {
         int stringKey = 0;
         int booleanKey = 0;
         for (final Object value : input) {
-            if (value.getClass() == double.class) {
+            if (value instanceof Double && numberKey < 10) {
                 SmartDashboard.putNumber("DB/Slider " + numberKey, (double) value);
                 numberKey++;
-            } else if (value.getClass() == String.class) {
+            } else if (value instanceof String && stringKey < 10) {
                 SmartDashboard.putString("DB/String " + stringKey, (String) value);
                 stringKey++;
-            } else if (value.getClass() == boolean.class) {
+            } else if (value instanceof Boolean && booleanKey < 10) {
                 SmartDashboard.putBoolean("DB/Button " + booleanKey, (boolean) value);
                 booleanKey++;
             }

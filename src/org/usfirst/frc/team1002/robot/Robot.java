@@ -15,7 +15,6 @@ public class Robot extends IterativeRobot {
     public static final Drive drive = new Drive();
     public static final Forklift forklift = new Forklift();
     public static final Joystick stick = new Joystick(RobotMap.stick);
-    public static final Auton auto = new Auton();
 
     // secondary handlers
     public static OI oi;
@@ -32,16 +31,16 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        drive.robotControl = true;
+        Auton.run();
     }
 
     @Override
     public void autonomousPeriodic() {
+
     }
 
     @Override
     public void teleopInit() {
-        drive.robotControl = false;
     }
 
     @Override

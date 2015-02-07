@@ -21,14 +21,14 @@ public class Drive extends Subsystem {
 
     Gyro gyro;
 
-    Encoder encoder;
+    Encoder leftFrontEncoder;
+    Encoder rightFrontEncoder;
+    Encoder leftBackEncoder;
+    Encoder rightBackEncoder;
 
     RobotDrive robotDrive;
 
     public boolean isPolar = true;
-
-    // should we use robot set inputs (true) or joystick inputs (false)?
-    public boolean robotControl = false;
 
     static final double SPINDEADZONECONSTANT = 0.1;
     static final double STICKDEADZONECONSTANT = 0.15;
@@ -41,7 +41,10 @@ public class Drive extends Subsystem {
 
         gyro = new Gyro(RobotMap.gyro);
 
-        encoder = new Encoder(0, 1);
+        leftFrontEncoder = new Encoder(RobotMap.encoders[0][0], RobotMap.encoders[0][1]);
+        rightFrontEncoder = new Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
+        rightBackEncoder = new Encoder(RobotMap.encoders[2][0], RobotMap.encoders[2][1]);
+        leftBackEncoder = new Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
 
         robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
@@ -53,7 +56,7 @@ public class Drive extends Subsystem {
         final double x = Robot.stick.getX();
         final double y = Robot.stick.getY();
         final double rotation = Robot.stick.getTwist();
-        Dashboard.publish(x, y, rotation);
+        Dashboard.publish(x, y, rotation, Robot.stick.getPOVCount());
         if (isPolar) {
             robotDrive.mecanumDrive_Cartesian(throttle(x), throttle(y), spinThrottle(rotation), 0);
         } else {
@@ -63,6 +66,13 @@ public class Drive extends Subsystem {
 
     public void move(double x, double y, double rotation) {
         robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
+    }
+
+    public void moveEncoderOne() {
+        while (Math.abs(rightFrontEncoder.getRaw()) < 1000) {
+            move(-0.5, 0, 0);
+        }
+        move(0, 0, 0);
     }
 
     public static double throttle(double input) {
