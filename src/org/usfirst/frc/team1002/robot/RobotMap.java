@@ -10,19 +10,19 @@ import java.util.List;
  * floating around.
  */
 public class RobotMap {
-	// port mappings, List<Integer> for grouped modules and int for single
-	// modules
+    // port mappings, List<Integer> for grouped modules and int for single
+    // modules
 
-	// motor ports
-	public static final List<Integer> motors = Arrays.asList(0, 1, 2, 3);
-	// joystick port
-	public static final int stick = 0;
-	// gyro
-	public static final int gyro = 0;
-	// limit switches
-	public static final List<Integer> limitSwitches = Arrays.asList(8, 9);
-	// encoders
-	public static final int[][] encoders = { { 0, 1 }, { 2, 3 } };
-	// forklift motor
-	public static final int forkliftMotor = 4;
+    // motor ports
+    public static final List<Integer> motors = Arrays.asList(0, 1, 2, 3);
+    // joystick port
+    public static final int stick = 0;
+    // gyro
+    public static final int gyro = 0;
+    // limit switches
+    public static final List<Integer> limitSwitches = Arrays.asList(8, 9);
+    // encoders
+    public static final int[][] encoders = { { 0, 1 }, { 2, 3 } };
+    // forklift motor
+    public static final int forkliftMotor = 0;
 }

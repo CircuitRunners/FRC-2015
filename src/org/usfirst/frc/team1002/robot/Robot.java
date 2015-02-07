@@ -1,11 +1,12 @@
 package org.usfirst.frc.team1002.robot;
 
+import org.usfirst.frc.team1002.robot.commands.Auton;
 import org.usfirst.frc.team1002.robot.subsystems.Drivebase;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -15,6 +16,7 @@ public class Robot extends IterativeRobot {
     public static final Drivebase drivebase = new Drivebase();
     public static final Forklift forklift = new Forklift();
     public static final Joystick stick = new Joystick(RobotMap.stick);
+    public static final Auton auto = new Auton();
 
     // secondary handlers
     public static OI oi;
@@ -26,8 +28,6 @@ public class Robot extends IterativeRobot {
     public double X;
     public double Y;
     public double Rotation;
-
-    Command autonomousCommand;
 
     @Override
     public void robotInit() {
@@ -42,9 +42,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) {
-            autonomousCommand.start();
-        }
+        // auto.start();
     }
 
     /**
@@ -52,9 +50,15 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-        robotControl = true;
-        move();
+        // Scheduler.getInstance().run();
+        // auto.runAuto();
+        forklift.LiftDown();
+        Timer.delay(0.5);
+        forklift.LiftUp();
+        Timer.delay(1);
+        drivebase.moveRight();
+        Timer.delay(0.25);
+        drivebase.move(0, 0, 0);
     }
 
     @Override
@@ -63,9 +67,8 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) {
-            autonomousCommand.cancel();
-        }
+        // Scheduler.getInstance().removeAll();
+        // auto.cancel();
     }
 
     /**
