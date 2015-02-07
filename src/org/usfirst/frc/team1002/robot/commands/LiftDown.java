@@ -4,9 +4,6 @@ import org.usfirst.frc.team1002.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class LiftDown extends Command {
 
     public LiftDown() {

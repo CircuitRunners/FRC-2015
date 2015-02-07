@@ -20,8 +20,8 @@ public class Forklift extends Subsystem {
 
     public Forklift() {
         forkliftMotor = new CANTalon(RobotMap.forkliftMotor);
-        limitSensorTop = new DigitalInput(RobotMap.limitSwitches.get(0));
-        limitSensorBot = new DigitalInput(RobotMap.limitSwitches.get(1));
+        limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
+        limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
         stopLift();
     }
 
