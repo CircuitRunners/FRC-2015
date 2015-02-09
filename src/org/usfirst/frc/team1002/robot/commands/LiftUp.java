@@ -1,13 +1,13 @@
 package org.usfirst.frc.team1002.robot.commands;
 
-import org.usfirst.frc.team1002.robot.Robot;
+import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftUp extends Command {
 
     public LiftUp() {
-        requires(Robot.forklift);
+        requires(new Forklift());
     }
 
     @Override
@@ -18,25 +18,25 @@ public class LiftUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.forklift.LiftUp();
+        Forklift.LiftUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return !Robot.forklift.getLimitTop();
+        return !Forklift.getLimitTop();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        Robot.forklift.stopLift();
+        Forklift.stopLift();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.forklift.stopLift();
+        Forklift.stopLift();
     }
 }

@@ -2,7 +2,6 @@ package org.usfirst.frc.team1002.robot.subsystems;
 
 import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.RobotMap;
-import org.usfirst.frc.team1002.robot.commands.Dashboard;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -14,21 +13,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drive extends Subsystem {
-    Victor leftFrontMotor;
-    Victor rightFrontMotor;
-    Victor leftBackMotor;
-    Victor rightBackMotor;
+    public static Victor leftFrontMotor;
+    public static Victor rightFrontMotor;
+    public static Victor leftBackMotor;
+    public static Victor rightBackMotor;
 
-    Gyro gyro;
+    public static Gyro gyro;
 
-    Encoder leftFrontEncoder;
-    Encoder rightFrontEncoder;
-    Encoder leftBackEncoder;
-    Encoder rightBackEncoder;
+    public static Encoder leftFrontEncoder;
+    public static Encoder rightFrontEncoder;
+    public static Encoder leftBackEncoder;
+    public static Encoder rightBackEncoder;
 
-    RobotDrive robotDrive;
+    public static RobotDrive robotDrive;
 
-    public boolean isPolar = true;
+    public static boolean isPolar = true;
 
     static final double SPINDEADZONECONSTANT = 0.1;
     static final double STICKDEADZONECONSTANT = 0.15;
@@ -52,11 +51,10 @@ public class Drive extends Subsystem {
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     }
 
-    public void move() {
+    public static void move() {
         final double x = Robot.stick.getX();
         final double y = Robot.stick.getY();
         final double rotation = Robot.stick.getTwist();
-        Dashboard.publish(x, y, rotation, Robot.stick.getPOVCount());
         if (isPolar) {
             robotDrive.mecanumDrive_Cartesian(throttle(x), throttle(y), spinThrottle(rotation), 0);
         } else {
@@ -64,11 +62,11 @@ public class Drive extends Subsystem {
         }
     }
 
-    public void move(double x, double y, double rotation) {
+    public static void move(double x, double y, double rotation) {
         robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
     }
 
-    public void moveEncoderOne() {
+    public static void moveEncoderOne() {
         while (Math.abs(rightFrontEncoder.getRaw()) < 1000) {
             move(-0.5, 0, 0);
         }

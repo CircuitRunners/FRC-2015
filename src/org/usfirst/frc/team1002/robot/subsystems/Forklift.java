@@ -14,9 +14,9 @@ public class Forklift extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    CANTalon forkliftMotor;
-    DigitalInput limitSensorTop;
-    DigitalInput limitSensorBot;
+    public static CANTalon forkliftMotor;
+    public static DigitalInput limitSensorTop;
+    public static DigitalInput limitSensorBot;
 
     public Forklift() {
         forkliftMotor = new CANTalon(RobotMap.forkliftMotor);
@@ -33,7 +33,7 @@ public class Forklift extends Subsystem {
 
     }
 
-    public void LiftUp() {
+    public static void LiftUp() {
         if (limitSensorTop.get()) {
             forkliftMotor.set(-1);
         } else {
@@ -42,11 +42,11 @@ public class Forklift extends Subsystem {
 
     }
 
-    public void stopLift() {
+    public static void stopLift() {
         forkliftMotor.set(0);
     }
 
-    public void LiftDown() {
+    public static void LiftDown() {
         if (limitSensorBot.get()) {
             forkliftMotor.set(1);
         } else {
@@ -54,11 +54,11 @@ public class Forklift extends Subsystem {
         }
     }
 
-    public boolean getLimitTop() {
+    public static boolean getLimitTop() {
         return limitSensorTop.get();
     }
 
-    public boolean getLimitBot() {
+    public static boolean getLimitBot() {
         return limitSensorBot.get();
     }
 }

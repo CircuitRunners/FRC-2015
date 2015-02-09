@@ -3,6 +3,7 @@ package org.usfirst.frc.team1002.robot;
 import org.usfirst.frc.team1002.robot.commands.LiftDown;
 import org.usfirst.frc.team1002.robot.commands.LiftStop;
 import org.usfirst.frc.team1002.robot.commands.LiftUp;
+import org.usfirst.frc.team1002.robot.commands.TurnOne;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -11,6 +12,9 @@ public class OI {
     JoystickButton downButton = new JoystickButton(Robot.stick, 4);
     JoystickButton driveToggle = new JoystickButton(Robot.stick, 1);
     JoystickButton gyroResetButton = new JoystickButton(Robot.stick, 2);
+
+    // TESTING STUFF //
+    JoystickButton encoderMoveButton = new JoystickButton(Robot.stick, 3);
 
     public OI() {
         if (!downButton.get()) {
@@ -23,6 +27,8 @@ public class OI {
 
         upButton.whenReleased(new LiftStop());
         downButton.whenReleased(new LiftStop());
+
+        encoderMoveButton.whenPressed(new TurnOne());
 
     }
 

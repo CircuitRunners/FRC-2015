@@ -2,7 +2,6 @@ package org.usfirst.frc.team1002.robot;
 
 import org.usfirst.frc.team1002.robot.commands.Auton;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,12 +10,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Robot extends IterativeRobot {
 
-    // fundamental systems
-    public static final Drive drive = new Drive();
-    public static final Forklift forklift = new Forklift();
+    // Joystick
     public static final Joystick stick = new Joystick(RobotMap.stick);
 
-    // secondary handlers
+    // Secondary handlers
     public static OI oi;
 
     @Override
@@ -50,7 +47,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        drive.move();
+        Drive.move();
     }
 
     @Override

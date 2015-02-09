@@ -1,9 +1,27 @@
-package org.usfirst.frc.team1002.robot.commands;
+package org.usfirst.frc.team1002.robot.subsystems;
 
+import org.usfirst.frc.team1002.robot.commands.PublishValues;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Dashboard {
+/**
+ *
+ */
+public class Dashboard extends Subsystem {
 
+    public Dashboard() {
+    }
+
+    @Override
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new PublishValues());
+
+    }
+
+    @SuppressWarnings("boxing")
     public static void publish(Object... input) {
         int numberKey = 0;
         int stringKey = 0;
@@ -21,4 +39,5 @@ public class Dashboard {
             }
         }
     }
+
 }
