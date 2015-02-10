@@ -11,9 +11,9 @@ public class Auton {
         Timer.delay(1);
         Drive.move(0, 0, 0);
         Timer.delay(0.1);
-        new LiftDown().start();
+        new Lift(-1).start();
         Timer.delay(2);
-        new LiftUp().start();
+        new Lift(1).start();
         Timer.delay(2);
         Drive.move(1, 0, 0);
         Timer.delay(5);

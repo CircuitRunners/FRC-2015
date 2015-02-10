@@ -1,26 +1,27 @@
 package org.usfirst.frc.team1002.robot.commands;
 
-import org.usfirst.frc.team1002.robot.subsystems.Drive;
+import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TurnOne extends Command {
+public class Lift extends Command {
 
-    public TurnOne() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(new Drive());
+    private final double speed;
+
+    public Lift(double speed) {
+        requires(new Forklift());
+        this.speed = speed;
     }
 
-    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Drive.moveEncoderOne();
+        Forklift.lift(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,11 +33,13 @@ public class TurnOne extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        Forklift.lift(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        Forklift.lift(0);
     }
 }

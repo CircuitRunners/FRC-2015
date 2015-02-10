@@ -12,6 +12,7 @@ public class Robot extends IterativeRobot {
 
     // Joystick
     public static final Joystick stick = new Joystick(RobotMap.stick);
+    public static boolean isPolar = false;
 
     // Secondary handlers
     public static OI oi;
@@ -46,8 +47,16 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+
         Scheduler.getInstance().run();
-        Drive.move();
+
+        // Switch between Cartesian and polar
+        if (stick.getRawButton(11)) {
+            isPolar = !isPolar;
+        }
+
+        // Drive the robot
+        Drive.move(stick, isPolar);
     }
 
     @Override

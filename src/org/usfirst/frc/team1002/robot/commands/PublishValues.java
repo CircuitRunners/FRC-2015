@@ -26,7 +26,14 @@ public class PublishValues extends Command {
     @SuppressWarnings("boxing")
     @Override
     protected void execute() {
-        Dashboard.publish(((Double) Robot.stick.getX()).toString(), ((Double) Robot.stick.getY()).toString(), ((Double) Robot.stick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString());
+        String isPolar;
+        if(Robot.isPolar) isPolar = "Polar"; else isPolar = "Cartestian";
+        
+        Dashboard.publish(((Double) Robot.stick.getX()).toString(),
+                ((Double) Robot.stick.getY()).toString(),
+                ((Double) Robot.stick.getTwist()).toString(),
+                ((Integer) Drive.leftFrontEncoder.getRaw()).toString(),
+                isPolar);
     }
 
     // Make this return true when this Command no longer needs to run execute()

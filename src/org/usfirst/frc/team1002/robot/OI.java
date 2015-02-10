@@ -1,34 +1,27 @@
 package org.usfirst.frc.team1002.robot;
 
-import org.usfirst.frc.team1002.robot.commands.LiftDown;
-import org.usfirst.frc.team1002.robot.commands.LiftStop;
-import org.usfirst.frc.team1002.robot.commands.LiftUp;
-import org.usfirst.frc.team1002.robot.commands.TurnOne;
+import org.usfirst.frc.team1002.robot.commands.Lift;
+import org.usfirst.frc.team1002.robot.commands.MoveDistance;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
     JoystickButton upButton = new JoystickButton(Robot.stick, 6);
     JoystickButton downButton = new JoystickButton(Robot.stick, 4);
-    JoystickButton driveToggle = new JoystickButton(Robot.stick, 1);
     JoystickButton gyroResetButton = new JoystickButton(Robot.stick, 2);
 
     // TESTING STUFF //
     JoystickButton encoderMoveButton = new JoystickButton(Robot.stick, 3);
 
     public OI() {
-        if (!downButton.get()) {
-            upButton.whileHeld(new LiftUp());
-        }
+        if (!downButton.get()) upButton.whileHeld(new Lift(1));
 
-        if (!upButton.get()) {
-            downButton.whileHeld(new LiftDown());
-        }
+        if (!upButton.get()) downButton.whileHeld(new Lift(-1));
 
-        upButton.whenReleased(new LiftStop());
-        downButton.whenReleased(new LiftStop());
+        upButton.whenReleased(new Lift(0));
+        downButton.whenReleased(new Lift(0));
 
-        encoderMoveButton.whenPressed(new TurnOne());
+        encoderMoveButton.whenPressed(new MoveDistance(1000));
 
     }
 
