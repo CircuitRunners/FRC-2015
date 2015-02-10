@@ -1,5 +1,7 @@
-/bin/
 /.settings/
+/bin/
+/build/
+/dist/
 
 *.jar
 *.class
