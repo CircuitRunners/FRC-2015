@@ -12,7 +12,6 @@ public class Robot extends IterativeRobot {
 
     // Joystick
     public static final Joystick stick = new Joystick(RobotMap.stick);
-    public static boolean isPolar = false;
 
     // Secondary handlers
     public static OI oi;
@@ -52,11 +51,11 @@ public class Robot extends IterativeRobot {
 
         // Switch between Cartesian and polar
         if (stick.getRawButton(11)) {
-            isPolar = !isPolar;
+            Drive.isCartesian = !Drive.isCartesian;
         }
 
         // Drive the robot
-        Drive.move(stick, isPolar);
+        Drive.move(stick);
     }
 
     @Override

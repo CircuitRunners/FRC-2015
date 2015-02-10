@@ -27,7 +27,7 @@ public class PublishValues extends Command {
     @Override
     protected void execute() {
         String isPolar;
-        if(Robot.isPolar) isPolar = "Polar"; else isPolar = "Cartestian";
+        if(Drive.isCartesian) isPolar = "Polar"; else isPolar = "Cartestian"; //$NON-NLS-1$ //$NON-NLS-2$
         
         Dashboard.publish(((Double) Robot.stick.getX()).toString(),
                 ((Double) Robot.stick.getY()).toString(),

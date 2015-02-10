@@ -8,7 +8,7 @@ public class MoveDistance extends Command {
 
     public final int turns;
 
-    public MoveDistance(int turns) {
+    public MoveDistance(@SuppressWarnings("hiding") int turns) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(new Drive());

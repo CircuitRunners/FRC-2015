@@ -34,6 +34,8 @@ public class Drive extends Subsystem {
 
     // RobotDrive
     public static RobotDrive robotDrive;
+    
+    public static boolean isCartesian = false;
 
     // Deadzone Constants
     public static final double SPIN_DEADZONE_CONSTANT = 0.1;
@@ -67,25 +69,15 @@ public class Drive extends Subsystem {
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     }
-
-    /**
-     * Default move function. Takes Cartesian inputs but is polar output.
-     * @param x is the speed to move in the x-direction
-     * @param y is the speed to move in the y-direction
-     * @param rotation is the speed to rotate
-     */
-    public static void move(double x, double y, double rotation) {
-        robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
-    }
     
     /**
-     * Alternate move function. Choose whether Cartesian or polar input is used.
+     * Default move function. Polar is used unless changed.
      * @param x is the speed to move in the x-direction
      * @param y is the speed to move in the y-direction
      * @param rotation is the speed to rotate
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
-    public static void move(double x, double y, double rotation, boolean isCartesian) {
+    public static void move(double x, double y, double rotation) {
         if (isCartesian) {
             robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
         } else {
@@ -98,7 +90,7 @@ public class Drive extends Subsystem {
      * @param joystick is the joystick used
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
-    public static void move(GenericHID joystick, boolean isCartesian) {
+    public static void move(GenericHID joystick) {
         if (isCartesian) {
             robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()),
                     throttle(joystick.getY()),
