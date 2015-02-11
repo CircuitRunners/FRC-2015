@@ -1,20 +1,21 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Drive;
+import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveDistance extends Command {
+/**
+ *
+ */
+public class Fork extends Command {
 
-    public final int turns;
+    private final double speed;
 
     @SuppressWarnings("hiding")
-    public MoveDistance(int turns) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(Robot.drive);
-        this.turns = turns;
+    public Fork(double speed) {
+        requires(Robot.forklift);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +26,7 @@ public class MoveDistance extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Drive.moveTurns(turns);
+        Forklift.fork(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,11 +38,13 @@ public class MoveDistance extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        Forklift.fork(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        Forklift.fork(0);
     }
 }

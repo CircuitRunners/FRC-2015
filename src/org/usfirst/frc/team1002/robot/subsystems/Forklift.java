@@ -5,6 +5,7 @@ import org.usfirst.frc.team1002.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,6 +15,7 @@ public class Forklift extends Subsystem {
 
     // Motor
     public static CANTalon forkliftMotor;
+    public static Talon forkMotor;
 
     // Sensors
     // Limit Switches
@@ -22,6 +24,7 @@ public class Forklift extends Subsystem {
 
     public Forklift() {
         forkliftMotor = new CANTalon(RobotMap.forkliftMotor);
+        forkMotor = new Talon(RobotMap.forkMotor);
         limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
         limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
         lift(0);
@@ -34,7 +37,7 @@ public class Forklift extends Subsystem {
 
     /**
      * Lifts forklift
-     * 
+     *
      * @param speed
      *            is the speed to lift the forklift
      */
@@ -44,5 +47,9 @@ public class Forklift extends Subsystem {
         } else {
             forkliftMotor.set(speed);
         }
+    }
+
+    public static void fork(double speed) {
+        forkMotor.set(speed);
     }
 }

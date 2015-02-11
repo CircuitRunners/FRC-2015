@@ -9,7 +9,8 @@ public class Lift extends Command {
 
     private final double speed;
 
-    public Lift(@SuppressWarnings("hiding") double speed) {
+    @SuppressWarnings("hiding")
+    public Lift(double speed) {
         requires(Robot.forklift);
         this.speed = speed;
     }
