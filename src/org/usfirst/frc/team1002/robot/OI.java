@@ -10,14 +10,10 @@ public class OI {
 	JoystickButton gyroResetButton = new JoystickButton(Robot.stick, 2);
 
 	public OI() {
-		if (!downButton.get()) {
-			upButton.whileHeld(new Lift(1));
-		}
 
-		if (!upButton.get()) {
-			downButton.whileHeld(new Lift(-1));
-		}
-
+		// Forklift
+		upButton.whileHeld(new Lift(1));
+		downButton.whileHeld(new Lift(-1));
 		upButton.whenReleased(new Lift(0));
 		downButton.whenReleased(new Lift(0));
 
