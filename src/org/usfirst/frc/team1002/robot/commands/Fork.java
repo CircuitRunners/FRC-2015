@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Fork extends Command {
-
     private double speed;
 
     public Fork(double speedIn) {
