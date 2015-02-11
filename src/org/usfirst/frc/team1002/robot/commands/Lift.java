@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1002.robot.commands;
 
+import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +10,7 @@ public class Lift extends Command {
     private final double speed;
 
     public Lift(@SuppressWarnings("hiding") double speed) {
-        requires(new Forklift());
+        requires(Robot.forklift);
         this.speed = speed;
     }
 

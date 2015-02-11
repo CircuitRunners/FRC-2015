@@ -14,7 +14,7 @@ public class PublishValues extends Command {
     public PublishValues() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(new Dashboard());
+        requires(Robot.dash);
     }
 
     // Called just before this Command runs the first time
@@ -23,17 +23,17 @@ public class PublishValues extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    @SuppressWarnings("boxing")
+    @SuppressWarnings({ "boxing", "nls" })
     @Override
     protected void execute() {
         String isPolar;
-        if(Drive.isCartesian) isPolar = "Polar"; else isPolar = "Cartestian"; //$NON-NLS-1$ //$NON-NLS-2$
-        
-        Dashboard.publish(((Double) Robot.stick.getX()).toString(),
-                ((Double) Robot.stick.getY()).toString(),
-                ((Double) Robot.stick.getTwist()).toString(),
-                ((Integer) Drive.leftFrontEncoder.getRaw()).toString(),
-                isPolar);
+        if (Drive.isCartesian) {
+            isPolar = "Polar";
+        } else {
+            isPolar = "Cartestian";
+        }
+
+        Dashboard.publish(((Double) Robot.stick.getX()).toString(), ((Double) Robot.stick.getY()).toString(), ((Double) Robot.stick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString(), isPolar);
     }
 
     // Make this return true when this Command no longer needs to run execute()

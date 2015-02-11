@@ -14,7 +14,7 @@ public class Forklift extends Subsystem {
 
     // Motor
     public static CANTalon forkliftMotor;
-    
+
     // Sensors
     // Limit Switches
     public static DigitalInput limitSensorTop;
@@ -34,7 +34,9 @@ public class Forklift extends Subsystem {
 
     /**
      * Lifts forklift
-     * @param speed is the speed to lift the forklift
+     * 
+     * @param speed
+     *            is the speed to lift the forklift
      */
     public static void lift(double speed) {
         if (limitSensorTop.get() && speed > 0 || limitSensorBot.get() && speed < 0) {

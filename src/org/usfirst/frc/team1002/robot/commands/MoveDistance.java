@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1002.robot.commands;
 
+import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,7 +12,7 @@ public class MoveDistance extends Command {
     public MoveDistance(@SuppressWarnings("hiding") int turns) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(new Drive());
+        requires(Robot.drive);
         this.turns = turns;
     }
 
