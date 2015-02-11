@@ -1,14 +1,1 @@
-/.settings/
-/bin/
-/build/
-/dist/
 
-*.jar
-*.class
-*.properties
-
-.classpath
-.project
-
-build.xml
-sysProps.xml
