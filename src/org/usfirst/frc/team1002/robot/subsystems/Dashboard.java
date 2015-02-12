@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * @author mastercoms
  */
+@SuppressWarnings({ "boxing", "nls" })
 public class Dashboard extends Subsystem {
 
     @Override
@@ -16,30 +17,44 @@ public class Dashboard extends Subsystem {
     }
 
     /**
-     * Publish values to Dashboard
+     * Publish numbers to Dashboard
      * 
-     * @param inputs
-     *            are the objects to place on the dashboard
+     * @param numbers
+     *            are the numbers to place on the dashboard
      */
-    @SuppressWarnings("boxing")
-    public static void publish(Object... inputs) {
-	int numberKey = 0;
-	int stringKey = 0;
-	int booleanKey = 0;
-	for (final Object value : inputs) {
-	    if (value instanceof Double && numberKey < 10) {
-		SmartDashboard.putNumber(
-			"DB/Slider " + numberKey, (double) value); //$NON-NLS-1$
-		numberKey++;
-	    } else if (value instanceof String && stringKey < 10) {
-		SmartDashboard.putString(
-			"DB/String " + stringKey, (String) value); //$NON-NLS-1$
-		stringKey++;
-	    } else if (value instanceof Boolean && booleanKey < 10) {
-		SmartDashboard.putBoolean(
-			"DB/Button " + booleanKey, (boolean) value); //$NON-NLS-1$
-		booleanKey++;
-	    }
+    public static void publish(double... numbers) {
+	int key = 0;
+	for (final double value : numbers) {
+	    SmartDashboard.putNumber("DB/Slider " + key, value);
+	    key++;
+	}
+    }
+
+    /**
+     * Publish strings to Dashboard
+     * 
+     * @param strings
+     *            are the strings to place on the dashboard
+     */
+    public static void publish(String... strings) {
+	int key = 0;
+	for (final String value : strings) {
+	    SmartDashboard.putString("DB/String " + key, value);
+	    key++;
+	}
+    }
+
+    /**
+     * Publish booleans to Dashboard
+     * 
+     * @param booleans
+     *            are the booleans to place on the dashboard
+     */
+    public static void publish(boolean... booleans) {
+	int key = 0;
+	for (final boolean value : booleans) {
+	    SmartDashboard.putBoolean("DB/LED " + key, value);
+	    key++;
 	}
     }
 

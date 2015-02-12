@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PublishValues extends Command {
 
     public PublishValues() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(Robot.dash);
+	// Use requires() here to declare subsystem dependencies
+	// eg. requires(chassis);
+	requires(Robot.dash);
     }
 
     // Called just before this Command runs the first time
@@ -26,20 +26,24 @@ public class PublishValues extends Command {
     @SuppressWarnings({ "boxing", "nls" })
     @Override
     protected void execute() {
-        String isPolar;
-        if (Drive.isCartesian) {
-            isPolar = "Polar";
-        } else {
-            isPolar = "Cartestian";
-        }
+	String driveType;
+	if (Drive.isCartesian) {
+	    driveType = "Cartesian";
+	} else {
+	    driveType = "Polar";
+	}
 
-        Dashboard.publish(((Double) Robot.joystick.getX()).toString(), ((Double) Robot.joystick.getY()).toString(), ((Double) Robot.joystick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString(), isPolar);
+	Dashboard.publish(((Double) Robot.joystick.getX()).toString(),
+		((Double) Robot.joystick.getY()).toString(),
+		((Double) Robot.joystick.getTwist()).toString(),
+		((Integer) Drive.leftFrontEncoder.getRaw()).toString(),
+		driveType);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+	return false;
     }
 
     // Called once after isFinished returns true

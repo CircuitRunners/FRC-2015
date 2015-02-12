@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Forklift extends Subsystem {
-
     public static CANTalon liftMotor;
     public static Talon forkMotor;
 
