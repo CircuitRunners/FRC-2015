@@ -5,15 +5,19 @@ import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Lift extends Command {
+/**
+ *
+ */
+public class Fork extends Command {
 
     private double speed;
 
-    public Lift(double speedIn) {
+    public Fork(double speedIn) {
 	requires(Robot.forklift);
 	this.speed = speedIn;
     }
 
+    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
     }
@@ -21,7 +25,7 @@ public class Lift extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-	Forklift.lift(this.speed);
+	Forklift.fork(this.speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
