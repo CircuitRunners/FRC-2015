@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Lift extends Command {
 
-	private double speed;
+	private final double speed;
 
 	public Lift(double speed) {
 		requires(Robot.forklift);
@@ -28,7 +28,7 @@ public class Lift extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return speed == 0;
 	}
 
 	// Called once after isFinished returns true

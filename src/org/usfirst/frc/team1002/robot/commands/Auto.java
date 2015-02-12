@@ -4,7 +4,7 @@ import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class Auton {
+public class Auto {
 
     public static void run() {
         Drive.move(-1, 0, 0);
