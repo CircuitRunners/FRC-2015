@@ -3,15 +3,20 @@ package org.usfirst.frc.team1002.robot;
 import org.usfirst.frc.team1002.robot.commands.Lift;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
-	JoystickButton upButton = new JoystickButton(Robot.stick, 6);
-	JoystickButton downButton = new JoystickButton(Robot.stick, 4);
-	JoystickButton gyroReset = new JoystickButton(Robot.stick, 2);
-	JoystickButton cartesianToggle = new JoystickButton(Robot.stick, 11);
+	JoystickButton upButton;
+	JoystickButton downButton;
+	JoystickButton gyroReset;
+	JoystickButton cartesianToggle;
 
-	public OI() {
+	public OI(GenericHID joystick) {
+		upButton = new JoystickButton(joystick, 6);
+		downButton = new JoystickButton(joystick, 4);
+		gyroReset = new JoystickButton(joystick, 2);
+		cartesianToggle = new JoystickButton(joystick, 11);
 
 		// Forklift
 		upButton.whileHeld(new Lift(1));

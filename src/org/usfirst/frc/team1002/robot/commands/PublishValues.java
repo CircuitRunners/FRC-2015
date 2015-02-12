@@ -33,7 +33,7 @@ public class PublishValues extends Command {
             isPolar = "Cartestian";
         }
 
-        Dashboard.publish(((Double) Robot.stick.getX()).toString(), ((Double) Robot.stick.getY()).toString(), ((Double) Robot.stick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString(), isPolar);
+        Dashboard.publish(((Double) Robot.joystick.getX()).toString(), ((Double) Robot.joystick.getY()).toString(), ((Double) Robot.joystick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString(), isPolar);
     }
 
     // Make this return true when this Command no longer needs to run execute()

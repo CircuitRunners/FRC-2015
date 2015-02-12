@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	// Static Instances of subsystems
-	public static final Joystick stick = new Joystick(RobotMap.stick);
+	public static final Joystick joystick = new Joystick(RobotMap.stick);
 	public static final Drive drive = new Drive();
 	public static final Forklift forklift = new Forklift();
 	public static final Dashboard dash = new Dashboard();
@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		oi = new OI(joystick);
 	}
 
 	@Override
@@ -51,11 +51,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-
 		Scheduler.getInstance().run();
-
 		// Drive the robot
-		Drive.move(stick);
+		Drive.move(joystick);
 	}
 
 	@Override
