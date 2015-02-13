@@ -24,6 +24,7 @@ public class Drive extends Subsystem {
     // Gyro
     public static Gyro gyro;
 
+    
     // Encoders
     public static Encoder leftFrontEncoder;
     public static Encoder rightFrontEncoder;
@@ -49,6 +50,7 @@ public class Drive extends Subsystem {
 
 	gyro = new Gyro(RobotMap.gyro);
 
+        /*
 	leftFrontEncoder = new Encoder(RobotMap.encoders[0][0], RobotMap.encoders[0][1]);
 	rightFrontEncoder = new Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
 	rightBackEncoder = new Encoder(RobotMap.encoders[2][0], RobotMap.encoders[2][1]);
@@ -62,6 +64,7 @@ public class Drive extends Subsystem {
 	rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 	rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 	leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+        */
 
 	robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
@@ -99,7 +102,7 @@ public class Drive extends Subsystem {
 	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
 	}
     }
-
+    /*
     /**
      * Move function using encoder input
      * 
@@ -111,6 +114,7 @@ public class Drive extends Subsystem {
 	}
 	move(0, 0, 0);
     }
+    */
 
     /**
      * Throttles joystick input using a deadzone and throttle scaler
