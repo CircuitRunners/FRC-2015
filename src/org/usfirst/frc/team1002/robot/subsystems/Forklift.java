@@ -25,7 +25,7 @@ public class Forklift extends Subsystem {
 	forkMotor = new Talon(RobotMap.forkMotor);
 	limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
 	limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
-	limitSensorFork = new DigitalInput(7);
+	limitSensorFork = new DigitalInput(RobotMap.limitSwitches[2]);
 	lift(0);
     }
 
@@ -40,12 +40,14 @@ public class Forklift extends Subsystem {
      * @param speed is the speed to lift the forklift
      */
     public static void lift(double speed) {
-	if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0) speed = 0;
+	if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0)
+	    speed = 0;
 	liftMotor.set(speed);
     }
 
     public static void fork(double speed) {
-	if (limitSensorFork.get()) speed = 0;
+	if (limitSensorFork.get())
+	    speed = 0;
 	forkMotor.set(speed);
     }
 }
