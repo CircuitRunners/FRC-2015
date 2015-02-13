@@ -123,7 +123,7 @@ public class Drive extends Subsystem {
 	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * ((-Robot.joystick.getThrottle() + 1) / 2);
+	return output * ((-Robot.joystickThrottle.getY() + 1) / 2);
     }
 
     /**
@@ -137,7 +137,7 @@ public class Drive extends Subsystem {
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * ((-Robot.joystick.getThrottle() + 1) / 2) * 0.5;
+	return output * ((-Robot.joystickThrottle.getY() + 1) / 2) * 0.5;
     }
 
     @Override
