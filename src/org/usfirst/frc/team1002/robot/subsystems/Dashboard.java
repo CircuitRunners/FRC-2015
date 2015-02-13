@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * @author mastercoms
  */
-@SuppressWarnings({ "boxing", "nls" })
 public class Dashboard extends Subsystem {
 
     @Override
@@ -19,8 +18,7 @@ public class Dashboard extends Subsystem {
     /**
      * Publish numbers to Dashboard
      * 
-     * @param numbers
-     *            are the numbers to place on the dashboard
+     * @param numbers are the numbers to place on the dashboard
      */
     public static void publish(double... numbers) {
 	int key = 0;
@@ -33,8 +31,7 @@ public class Dashboard extends Subsystem {
     /**
      * Publish strings to Dashboard
      * 
-     * @param strings
-     *            are the strings to place on the dashboard
+     * @param strings are the strings to place on the dashboard
      */
     public static void publish(String... strings) {
 	int key = 0;
@@ -47,8 +44,7 @@ public class Dashboard extends Subsystem {
     /**
      * Publish booleans to Dashboard
      * 
-     * @param booleans
-     *            are the booleans to place on the dashboard
+     * @param booleans are the booleans to place on the dashboard
      */
     public static void publish(boolean... booleans) {
 	int key = 0;

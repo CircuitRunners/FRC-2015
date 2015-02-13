@@ -49,14 +49,10 @@ public class Drive extends Subsystem {
 
 	gyro = new Gyro(RobotMap.gyro);
 
-	leftFrontEncoder = new Encoder(RobotMap.encoders[0][0],
-		RobotMap.encoders[0][1]);
-	rightFrontEncoder = new Encoder(RobotMap.encoders[1][0],
-		RobotMap.encoders[1][1]);
-	rightBackEncoder = new Encoder(RobotMap.encoders[2][0],
-		RobotMap.encoders[2][1]);
-	leftBackEncoder = new Encoder(RobotMap.encoders[3][0],
-		RobotMap.encoders[3][1]);
+	leftFrontEncoder = new Encoder(RobotMap.encoders[0][0], RobotMap.encoders[0][1]);
+	rightFrontEncoder = new Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
+	rightBackEncoder = new Encoder(RobotMap.encoders[2][0], RobotMap.encoders[2][1]);
+	leftBackEncoder = new Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
 
 	leftFrontEncoder.reset();
 	rightFrontEncoder.reset();
@@ -67,8 +63,7 @@ public class Drive extends Subsystem {
 	rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 	leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 
-	robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor,
-		rightFrontMotor, rightBackMotor);
+	robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
 	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
@@ -77,14 +72,10 @@ public class Drive extends Subsystem {
     /**
      * Default move function. Polar is used unless changed.
      * 
-     * @param x
-     *            is the speed to move in the x-direction
-     * @param y
-     *            is the speed to move in the y-direction
-     * @param rotation
-     *            is the speed to rotate
-     * @param isCartesian
-     *            defines whether Cartesian or polar is to be used
+     * @param x is the speed to move in the x-direction
+     * @param y is the speed to move in the y-direction
+     * @param rotation is the speed to rotate
+     * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(double x, double y, double rotation) {
 	if (isCartesian) {
@@ -98,32 +89,24 @@ public class Drive extends Subsystem {
      * Alternate move function. Takes joystick input and automatically throttles
      * and sets.
      * 
-     * @param joystick
-     *            is the joystick used
-     * @param isCartesian
-     *            defines whether Cartesian or polar is to be used
+     * @param joystick is the joystick used
+     * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(GenericHID joystick) {
 	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()),
-		    throttle(joystick.getY()),
-		    spinThrottle(joystick.getTwist()), gyro.getAngle());
+	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), gyro.getAngle());
 	} else {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()),
-		    throttle(joystick.getY()),
-		    spinThrottle(joystick.getTwist()), 0);
+	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
 	}
     }
 
     /**
      * Move function using encoder input
      * 
-     * @param turns
-     *            is the number of encoder turns to move
+     * @param turns is the number of encoder turns to move
      */
     public static void moveTurns(int turns) {
-	while (Math.abs((leftFrontEncoder.getRaw() + leftBackEncoder.getRaw()
-		+ rightBackEncoder.getRaw() + rightFrontEncoder.getRaw()) / 4) < turns) {
+	while (Math.abs((leftFrontEncoder.getRaw() + leftBackEncoder.getRaw() + rightBackEncoder.getRaw() + rightFrontEncoder.getRaw()) / 4) < turns) {
 	    move(-0.5, 0, 0);
 	}
 	move(0, 0, 0);
@@ -132,8 +115,7 @@ public class Drive extends Subsystem {
     /**
      * Throttles joystick input using a deadzone and throttle scaler
      * 
-     * @param input
-     *            is the raw input from the joystick
+     * @param input is the raw input from the joystick
      * @return
      */
     private static double throttle(double input) {
@@ -147,8 +129,7 @@ public class Drive extends Subsystem {
     /**
      * Throttles joystick twist input using a deadzone and throttle scaler
      * 
-     * @param input
-     *            is the raw input from the joystick
+     * @param input is the raw input from the joystick
      * @return
      */
     private static double spinThrottle(double input) {

@@ -31,7 +31,7 @@ public class OI {
 	this.downButton.whenReleased(new Lift(0));
 
 	this.forkIn.whileHeld(new Fork(1));
-	this.forkOut.whileHeld(new Fork(-1));
+	this.forkOut.whileHeld(new Fork(-0.666));
 
 	this.forkIn.whenReleased(new Fork(0));
 	this.forkOut.whenReleased(new Fork(0));

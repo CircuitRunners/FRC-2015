@@ -18,6 +18,8 @@ public class Forklift extends Subsystem {
     public static DigitalInput limitSensorTop;
     public static DigitalInput limitSensorBot;
 
+    public static DigitalInput limitSensorFork;
+
     public Forklift() {
 	liftMotor = new CANTalon(RobotMap.liftMotor);
 	forkMotor = new Talon(RobotMap.forkMotor);
@@ -34,19 +36,19 @@ public class Forklift extends Subsystem {
     /**
      * Lifts forklift
      *
-     * @param speed
-     *            is the speed to lift the forklift
+     * @param speed is the speed to lift the forklift
      */
     public static void lift(double speed) {
-	double speedOut = speed;
-	if (!limitSensorBot.get() && speed < 0 || !limitSensorTop.get()
-		&& speed > 0) {
-	    speedOut = 0;
+	if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0) {
+	    speed = 0;
 	}
-	liftMotor.set(speedOut);
+	liftMotor.set(speed);
     }
 
     public static void fork(double speed) {
-	forkMotor.set(speed);
+	if (limitSensorFork.get()) {
+	    speed = 0;
+	}
+	liftMotor.set(speed);
     }
 }
