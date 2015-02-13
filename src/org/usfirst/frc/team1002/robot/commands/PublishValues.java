@@ -28,7 +28,12 @@ public class PublishValues extends Command {
 	    driveType = "Polar";
 	}
 
-	Dashboard.publish(((Double) Robot.joystick.getX()).toString(), ((Double) Robot.joystick.getY()).toString(), ((Double) Robot.joystick.getTwist()).toString(), ((Integer) Drive.leftFrontEncoder.getRaw()).toString(), driveType);
+	Dashboard.publish(((Double) Robot.joystick.getX()).toString());// ,
+								       // ((Double)
+								       // Robot.joystick.getY()).toString(),
+								       // ((Double)
+								       // Robot.joystick.getTwist()).toString(),
+								       // driveType);
     }
 
     @Override
