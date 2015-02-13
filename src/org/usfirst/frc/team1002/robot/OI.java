@@ -16,8 +16,8 @@ public class OI {
     JoystickButton forkOut;
 
     public OI(GenericHID... joystick) {
-	this.upButton = new JoystickButton(joystick[0], 6);
-	this.downButton = new JoystickButton(joystick[0], 4);
+	this.upButton = new JoystickButton(joystick[1], 6);
+	this.downButton = new JoystickButton(joystick[1], 4);
 	this.gyroReset = new JoystickButton(joystick[0], 2);
 	this.cartesianToggle = new JoystickButton(joystick[0], 11);
 	this.forkIn = new JoystickButton(joystick[1], 3);
@@ -30,8 +30,8 @@ public class OI {
 	this.upButton.whenReleased(new Lift(0));
 	this.downButton.whenReleased(new Lift(0));
 
-	this.forkIn.whileHeld(new Fork(1));
-	this.forkOut.whileHeld(new Fork(-0.666));
+	this.forkIn.whileHeld(new Fork(-1));
+	this.forkOut.whileHeld(new Fork(0.666));
 
 	this.forkIn.whenReleased(new Fork(0));
 	this.forkOut.whenReleased(new Fork(0));

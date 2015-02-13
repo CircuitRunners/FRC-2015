@@ -46,7 +46,7 @@ public class Forklift extends Subsystem {
     }
 
     public static void fork(double speed) {
-	if (limitSensorFork.get()) {
+	if (!limitSensorFork.get() && speed > 0) {
 	    speed = 0;
 	}
 	liftMotor.set(speed);
