@@ -49,19 +49,20 @@ public class Drive extends Subsystem {
 
 	gyro = new Gyro(RobotMap.gyro);
 
-	leftFrontEncoder = new Encoder(RobotMap.encoders[0][0], RobotMap.encoders[0][1]);
-	rightFrontEncoder = new Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
-	rightBackEncoder = new Encoder(RobotMap.encoders[2][0], RobotMap.encoders[2][1]);
-	leftBackEncoder = new Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
-
-	leftFrontEncoder.reset();
-	rightFrontEncoder.reset();
-	rightBackEncoder.reset();
-	leftBackEncoder.reset();
-	leftFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+	/*
+	 * leftFrontEncoder = new Encoder(RobotMap.encoders[0][0],
+	 * RobotMap.encoders[0][1]); rightFrontEncoder = new
+	 * Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
+	 * rightBackEncoder = new Encoder(RobotMap.encoders[2][0],
+	 * RobotMap.encoders[2][1]); leftBackEncoder = new
+	 * Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
+	 * leftFrontEncoder.reset(); rightFrontEncoder.reset();
+	 * rightBackEncoder.reset(); leftBackEncoder.reset();
+	 * leftFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+	 * rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+	 * rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+	 * leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+	 */
 
 	robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
@@ -105,12 +106,12 @@ public class Drive extends Subsystem {
      * 
      * @param turns is the number of encoder turns to move
      */
-    public static void moveTurns(int turns) {
-	while (Math.abs((leftFrontEncoder.getRaw() + leftBackEncoder.getRaw() + rightBackEncoder.getRaw() + rightFrontEncoder.getRaw()) / 4) < turns) {
-	    move(-0.5, 0, 0);
-	}
-	move(0, 0, 0);
-    }
+    /*
+     * public static void moveTurns(int turns) { while
+     * (Math.abs((leftFrontEncoder.getRaw() + leftBackEncoder.getRaw() +
+     * rightBackEncoder.getRaw() + rightFrontEncoder.getRaw()) / 4) < turns) {
+     * move(-0.5, 0, 0); } move(0, 0, 0); }
+     */
 
     /**
      * Throttles joystick input using a deadzone and throttle scaler
