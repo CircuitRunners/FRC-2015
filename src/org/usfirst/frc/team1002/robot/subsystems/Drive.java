@@ -37,8 +37,8 @@ public class Drive extends Subsystem {
     public static boolean isCartesian = false;
 
     // Deadzone Constants
-    public static final double SPIN_DEADZONE_CONSTANT = 0.1;
-    public static final double STICK_DEADZONE_CONSTANT = 0.15;
+    public static final double SPIN_DEADZONE_CONSTANT = 0.2;
+    public static final double STICK_DEADZONE_CONSTANT = 0.2;
 
     public Drive() {
 	leftFrontMotor = new Victor(RobotMap.motors[0]);
@@ -94,7 +94,8 @@ public class Drive extends Subsystem {
      */
     public static void move(GenericHID joystick) {
 	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), gyro.getAngle());
+	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)),
+		    gyro.getAngle());
 	} else {
 	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), 0);
 	}
@@ -137,7 +138,7 @@ public class Drive extends Subsystem {
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * ((-Robot.xbox.getThrottle() + 1) / 2) * 0.5;
+	return output;
     }
 
     @Override
