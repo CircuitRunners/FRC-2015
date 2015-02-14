@@ -3,7 +3,6 @@ package org.usfirst.frc.team1002.robot.subsystems;
 import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -24,13 +23,14 @@ public class Drive extends Subsystem {
     // Gyro
     public static Gyro gyro;
 
-    // Encoders
+    /* Encoders
     public static Encoder leftFrontEncoder;
     public static Encoder rightFrontEncoder;
     public static Encoder leftBackEncoder;
     public static Encoder rightBackEncoder;
+    */
 
-    private static final double DISTANCE_PER_PULSE = 0;
+    // private static final double DISTANCE_PER_PULSE = 0;
 
     // RobotDrive
     public static RobotDrive robotDrive;
