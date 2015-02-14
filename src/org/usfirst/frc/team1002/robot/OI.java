@@ -4,7 +4,6 @@ import org.usfirst.frc.team1002.robot.commands.Fork;
 import org.usfirst.frc.team1002.robot.commands.Lift;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
@@ -15,13 +14,13 @@ public class OI {
     JoystickButton forkIn;
     JoystickButton forkOut;
 
-    public OI(GenericHID... joystick) {
-	this.upButton = new JoystickButton(joystick[1], 6);
-	this.downButton = new JoystickButton(joystick[1], 4);
-	this.gyroReset = new JoystickButton(joystick[0], 2);
-	this.cartesianToggle = new JoystickButton(joystick[0], 11);
-	this.forkIn = new JoystickButton(joystick[1], 3);
-	this.forkOut = new JoystickButton(joystick[1], 5);
+    public OI() {
+	this.upButton = new JoystickButton(Robot.xbox, 4);
+	this.downButton = new JoystickButton(Robot.xbox, 1);
+	this.gyroReset = new JoystickButton(Robot.xbox, 7);
+	this.cartesianToggle = new JoystickButton(Robot.xbox, 8);
+	this.forkIn = new JoystickButton(Robot.xbox, 3);
+	this.forkOut = new JoystickButton(Robot.xbox, 2);
 
 	// Forklift
 	this.upButton.whileHeld(new Lift(1));
