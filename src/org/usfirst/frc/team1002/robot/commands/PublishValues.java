@@ -27,13 +27,7 @@ public class PublishValues extends Command {
 	} else {
 	    driveType = "Polar";
 	}
-
-	Dashboard.publish(((Double) Robot.joystick.getX()).toString());// ,
-								       // ((Double)
-								       // Robot.joystick.getY()).toString(),
-								       // ((Double)
-								       // Robot.joystick.getTwist()).toString(),
-								       // driveType);
+	Dashboard.publish(((Double) Robot.joystickMove.getX()).toString(), ((Double) Robot.joystickMove.getY()).toString(), ((Double) Robot.joystickMove.getTwist()).toString(), driveType);
     }
 
     @Override

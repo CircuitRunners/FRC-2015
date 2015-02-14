@@ -43,6 +43,6 @@ public class Fork extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-	Forklift.lift(0);
+	Forklift.fork(0);
     }
 }
