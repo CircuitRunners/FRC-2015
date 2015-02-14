@@ -5,9 +5,6 @@ import org.usfirst.frc.team1002.robot.commands.PublishValues;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * @author mastercoms
- */
 public class Dashboard extends Subsystem {
 
     @Override
@@ -52,5 +49,9 @@ public class Dashboard extends Subsystem {
 	    SmartDashboard.putBoolean("DB/LED " + key, value);
 	    key++;
 	}
+    }
+
+    public static boolean getBoolean(int i) {
+	return SmartDashboard.getBoolean("DB/Button " + i);
     }
 }
