@@ -23,12 +23,11 @@ public class Drive extends Subsystem {
     // Gyro
     public static Gyro gyro;
 
-    /* Encoders
-    public static Encoder leftFrontEncoder;
-    public static Encoder rightFrontEncoder;
-    public static Encoder leftBackEncoder;
-    public static Encoder rightBackEncoder;
-    */
+    /*
+     * Encoders public static Encoder leftFrontEncoder; public static Encoder
+     * rightFrontEncoder; public static Encoder leftBackEncoder; public static
+     * Encoder rightBackEncoder;
+     */
 
     // private static final double DISTANCE_PER_PULSE = 0;
 
@@ -95,9 +94,9 @@ public class Drive extends Subsystem {
      */
     public static void move(GenericHID joystick) {
 	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), gyro.getAngle());
+	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), gyro.getAngle());
 	} else {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
+	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), 0);
 	}
     }
 
