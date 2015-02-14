@@ -79,9 +79,15 @@ public class Drive extends Subsystem {
      */
     public static void move(double x, double y, double rotation) {
 	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
+	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle()); // Bad
+										// drive
+										// pretend
+										// it
+										// doesn't
+										// exist
 	} else {
-	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
+	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0); // "Polar"
+								  // drive
 	}
     }
 
@@ -95,10 +101,10 @@ public class Drive extends Subsystem {
     public static void move(GenericHID joystick) {
 	if (isCartesian) {
 	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)),
-		    gyro.getAngle());
+		    gyro.getAngle()); // Bad special drive
 	} else {
 	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), 0);
-	}
+	} // "Polar" drive from joystick
     }
 
     /**
@@ -122,9 +128,11 @@ public class Drive extends Subsystem {
     private static double throttle(double input) {
 	double output = input;
 	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
-	    output = 0;
+	    output = 0; // If within deadzone then don't move to stop unintended
+			// inputs and ghost inputs
 	}
-	return output * ((-Robot.xbox.getThrottle() + 1) / 2);
+	return output * ((-Robot.xbox.getThrottle() + 1) / 2); // gotta go fast
+	// uh oh too fast gotta go slow
     }
 
     /**
@@ -138,7 +146,9 @@ public class Drive extends Subsystem {
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output;
+	return Math.signum(output) * Math.abs(Math.pow(output, 2)); // special
+								    // powers
+								    // boooy
     }
 
     @Override

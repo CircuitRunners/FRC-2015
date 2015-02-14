@@ -16,31 +16,25 @@ public class Fork extends Command {
 	this.speed = speedIn;
     }
 
-    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
 	Forklift.fork(this.speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
 	return this.speed == 0;
     }
 
-    // Called once after isFinished returns true
     @Override
     protected void end() {
 	Forklift.fork(0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     @Override
     protected void interrupted() {
 	Forklift.fork(0);
