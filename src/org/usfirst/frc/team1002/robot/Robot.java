@@ -7,6 +7,7 @@ import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -18,32 +19,45 @@ public class Robot extends IterativeRobot {
     public static final Forklift forklift = new Forklift();
     public static final Dashboard dash = new Dashboard();
 
+    CommandGroup auto;
+
     // Secondary handlers
     public static OI oi;
 
     @Override
     public void robotInit() {
-	oi = new OI();
+        oi = new OI();
+        auto = new Auto();
     }
 
     @Override
     public void disabledPeriodic() {
-	Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     @Override
     public void autonomousInit() {
+        if (auto != null) {
+            auto.start();
+        }
     }
 
     @Override
     public void autonomousPeriodic() {
-	for (int i = 0; i < 1; i++)
-	    Auto.run();
-	return;
     }
 
     @Override
     public void teleopInit() {
+        if (auto != null) {
+            auto.cancel();
+        }
+    }
+
+    @Override
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+        // Drive the robot
+        Drive.move(xbox);
     }
 
     @Override
@@ -51,14 +65,7 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void teleopPeriodic() {
-	Scheduler.getInstance().run();
-	// Drive the robot
-	Drive.move(xbox);
-    }
-
-    @Override
     public void testPeriodic() {
-	LiveWindow.run();
+        LiveWindow.run();
     }
 }

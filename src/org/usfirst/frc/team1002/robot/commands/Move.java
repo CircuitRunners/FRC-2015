@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,10 +8,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PublishValues extends Command {
+public class Move extends Command {
 
-    public PublishValues() {
-        requires(Robot.dash);
+    private static double x;
+    private static double y;
+    private static double rotation;
+
+    public Move(double x, double y, double rotation) {
+        requires(Robot.drive);
+        Move.x = x;
+        Move.y = y;
+        Move.rotation = rotation;
     }
 
     @Override
@@ -21,13 +27,7 @@ public class PublishValues extends Command {
 
     @Override
     protected void execute() {
-        String driveType;
-        if (Drive.isCartesian) {
-            driveType = "Cartesian";
-        } else {
-            driveType = "Polar";
-        }
-        Dashboard.publish(((Double) Robot.xbox.getX()).toString(), ((Double) Robot.xbox.getY()).toString(), ((Double) Robot.xbox.getTwist()).toString(), driveType);
+        Drive.move(x, y, rotation);
     }
 
     @Override
