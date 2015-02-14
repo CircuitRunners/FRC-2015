@@ -36,7 +36,7 @@ public class Forklift extends Subsystem {
 
     /**
      * Lifts forklift
-     *
+     * 
      * @param speed is the speed to lift the forklift
      */
     public static void lift(double speed) {

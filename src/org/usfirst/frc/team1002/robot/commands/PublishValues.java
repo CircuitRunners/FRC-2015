@@ -5,6 +5,7 @@ import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,7 +28,9 @@ public class PublishValues extends Command {
 	} else {
 	    driveType = "Polar";
 	}
-	Dashboard.publish(((Double) Robot.xbox.getX()).toString(), ((Double) Robot.xbox.getY()).toString(), ((Double) Robot.xbox.getTwist()).toString(), driveType);
+	Dashboard.publish("X Axis: " + ((Double) Robot.xbox.getX()).toString(), "Y Axis: " + ((Double) Robot.xbox.getY()).toString(), "Twist Axis: " + ((Double) Robot.xbox.getTwist()).toString(),
+		"Throttle: " + ((Double) Drive.multiplier).toString(), driveType);
+	SmartDashboard.putString("DB/String 10", "TEST!!");
     }
 
     @Override

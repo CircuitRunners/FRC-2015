@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
-import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -35,6 +34,7 @@ public class Drive extends Subsystem {
     public static RobotDrive robotDrive;
 
     public static boolean isCartesian = false;
+    public static double multiplier = 1;
 
     // Deadzone Constants
     public static final double SPIN_DEADZONE_CONSTANT = 0.1;
@@ -123,7 +123,7 @@ public class Drive extends Subsystem {
 	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * ((-Robot.xbox.getThrottle() + 1) / 2);
+	return output * multiplier;
     }
 
     /**
@@ -137,7 +137,7 @@ public class Drive extends Subsystem {
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * ((-Robot.xbox.getThrottle() + 1) / 2) * 0.5;
+	return output * multiplier;
     }
 
     @Override
