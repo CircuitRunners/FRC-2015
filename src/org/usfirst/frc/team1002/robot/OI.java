@@ -15,33 +15,33 @@ public class OI {
     JoystickButton forkOut;
 
     public OI() {
-	this.upButton = new JoystickButton(Robot.xbox, 4);
-	this.downButton = new JoystickButton(Robot.xbox, 1);
-	this.gyroReset = new JoystickButton(Robot.xbox, 7);
-	this.cartesianToggle = new JoystickButton(Robot.xbox, 8);
-	this.forkIn = new JoystickButton(Robot.xbox, 3);
-	this.forkOut = new JoystickButton(Robot.xbox, 2);
+	upButton = new JoystickButton(Robot.xbox, 4);
+	downButton = new JoystickButton(Robot.xbox, 1);
+	gyroReset = new JoystickButton(Robot.xbox, 7);
+	cartesianToggle = new JoystickButton(Robot.xbox, 8);
+	forkIn = new JoystickButton(Robot.xbox, 3);
+	forkOut = new JoystickButton(Robot.xbox, 2);
 
 	// Forklift
-	this.upButton.whileHeld(new Lift(1));
-	this.downButton.whileHeld(new Lift(-1));
+	upButton.whileHeld(new Lift(1));
+	downButton.whileHeld(new Lift(-1));
 
-	this.upButton.whenReleased(new Lift(0));
-	this.downButton.whenReleased(new Lift(0));
+	upButton.whenReleased(new Lift(0));
+	downButton.whenReleased(new Lift(0));
 
-	this.forkIn.whileHeld(new Fork(-1));
-	this.forkOut.whileHeld(new Fork(0.666));
+	forkIn.whileHeld(new Fork(-1));
+	forkOut.whileHeld(new Fork(0.666));
 
-	this.forkIn.whenReleased(new Fork(0));
-	this.forkOut.whenReleased(new Fork(0));
+	forkIn.whenReleased(new Fork(0));
+	forkOut.whenReleased(new Fork(0));
 
 	// Switch between Cartesian and polar
-	if (this.cartesianToggle.get()) {
+	if (cartesianToggle.get()) {
 	    Drive.isCartesian = !Drive.isCartesian;
 	}
 
 	// Reset the gyro angle
-	if (this.gyroReset.get()) {
+	if (gyroReset.get()) {
 	    Drive.gyro.reset();
 	}
     }
