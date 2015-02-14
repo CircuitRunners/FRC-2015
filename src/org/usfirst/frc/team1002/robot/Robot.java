@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 public class Robot extends IterativeRobot {
 
@@ -21,9 +22,13 @@ public class Robot extends IterativeRobot {
     // Secondary handlers
     public static OI oi;
 
+    // Camera
+    public static AxisCamera camera;
+
     @Override
     public void robotInit() {
 	oi = new OI();
+	camera = new AxisCamera("10.10.2.11");
     }
 
     @Override
