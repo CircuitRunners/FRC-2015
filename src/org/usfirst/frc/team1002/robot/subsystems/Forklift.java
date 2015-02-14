@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
 import org.usfirst.frc.team1002.robot.RobotMap;
+import org.usfirst.frc.team1002.robot.commands.GetDash;
 import org.usfirst.frc.team1002.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -45,7 +46,7 @@ public class Forklift extends Subsystem {
     }
 
     public static void fork(double speed) {
-	if (!limitSensorFork.get() && speed < 0 && Dashboard.getBoolean(1)) speed = 0;
+	if (!limitSensorFork.get() && speed < 0 && new GetDash()) speed = 0;
 	forkMotor.set(speed);
     }
 }
