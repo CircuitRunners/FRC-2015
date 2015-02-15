@@ -25,9 +25,15 @@ public class PublishValues extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+	String driveType;
+	if (Drive.isCartesian) {
+	    driveType = "Cartesian";
+	} else {
+	    driveType = "Polar";
+	}
 	Dashboard.publish(((Double) Robot.xbox.getX()).toString(), ((Double) Robot.xbox.getY()).toString(),
-		((Double) Robot.xbox.getRawAxis(4)).toString(), ((Double) Drive.multiplier).toString());
-	Dashboard.publish(Forklift.limitSensorTop.get(), Forklift.limitSensorBot.get(), Forklift.limitSensorFork.get());
+		((Double) Robot.xbox.getTwist()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
+		((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString(), driveType);
     }
 
     // Make this return true when this Command no longer needs to run execute()
