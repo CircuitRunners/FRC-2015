@@ -37,9 +37,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        if (auto != null) {
-            auto.start();
-        }
+        if (auto != null) auto.start();
     }
 
     @Override
@@ -48,9 +46,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        if (auto != null) {
-            auto.cancel();
-        }
+        if (auto != null) auto.cancel();
     }
 
     @Override
