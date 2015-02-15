@@ -39,6 +39,8 @@ public class Drive extends Subsystem {
     // Deadzone Constants
     public static final double SPIN_DEADZONE_CONSTANT = 0.2;
     public static final double STICK_DEADZONE_CONSTANT = 0.2;
+    public static final double SPIN_POWER = 2;
+    public static final double STICK_POWER = 2;
 
     public Drive() {
 	leftFrontMotor = new Victor(RobotMap.motors[0]);
@@ -131,7 +133,7 @@ public class Drive extends Subsystem {
 	    output = 0; // If within deadzone then don't move to stop unintended
 			// inputs and ghost inputs
 	}
-	return output * multiplier;
+	return specPow(output, STICK_POWER) * multiplier;
     }
 
     /**
@@ -145,7 +147,11 @@ public class Drive extends Subsystem {
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
 	}
-	return output * multiplier;
+	return specPow(output, SPIN_POWER) * multiplier;
+    }
+
+    private static double specPow(double base, double exp) {
+	return Math.signum(base) * Math.abs(Math.pow(base, exp));
     }
 
     @Override

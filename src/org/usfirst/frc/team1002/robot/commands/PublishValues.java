@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PublishValues extends Command {
 
     public PublishValues() {
-	// Use requires() here to declare subsystem dependencies
-	// eg. requires(chassis);
+	requires(Robot.dash);
     }
 
     // Called just before this Command runs the first time

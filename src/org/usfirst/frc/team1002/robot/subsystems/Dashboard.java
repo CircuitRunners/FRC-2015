@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
+import org.usfirst.frc.team1002.robot.commands.PublishValues;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -48,7 +50,6 @@ public class Dashboard extends Subsystem {
     }
 
     public void initDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// setDefaultCommand(new MySpecialCommand());
+	setDefaultCommand(new PublishValues());
     }
 }
