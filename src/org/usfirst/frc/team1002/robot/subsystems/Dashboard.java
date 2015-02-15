@@ -1,31 +1,19 @@
-package org.usfirst.frc.team1002.robot.commands;
+package org.usfirst.frc.team1002.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class SetDash extends Command {
-
-    public SetDash(double... numbers) {
-	int key = 0;
-	for (final double value : numbers) {
-	    SmartDashboard.putNumber("DB/Slider " + key, value);
-	    key++;
-	}
-    }
-
-    @Override
-    protected void initialize() {
-    }
+public class Dashboard extends Subsystem {
 
     /**
      * Publish numbers to Dashboard
      * 
      * @param numbers are the numbers to place on the dashboard
      */
-    public static void execute(double... numbers) {
+    public static void publish(double... numbers) {
 	int key = 0;
 	for (final double value : numbers) {
 	    SmartDashboard.putNumber("DB/Slider " + key, value);
@@ -38,7 +26,7 @@ public class SetDash extends Command {
      * 
      * @param strings are the strings to place on the dashboard
      */
-    public static void execute(String... strings) {
+    public static void publish(String... strings) {
 	int key = 0;
 	for (final String value : strings) {
 	    SmartDashboard.putString("DB/String " + key, value);
@@ -51,7 +39,7 @@ public class SetDash extends Command {
      * 
      * @param booleans are the booleans to place on the dashboard
      */
-    public static void execute(boolean... booleans) {
+    public static void publish(boolean... booleans) {
 	int key = 0;
 	for (final boolean value : booleans) {
 	    SmartDashboard.putBoolean("DB/LED " + key, value);
@@ -59,20 +47,8 @@ public class SetDash extends Command {
 	}
     }
 
-    @Override
-    protected boolean isFinished() {
-	return false;
-    }
-
-    @Override
-    protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
-    }
-
-    @Override
-    protected void execute() {
+    public void initDefaultCommand() {
+	// Set the default command for a subsystem here.
+	// setDefaultCommand(new MySpecialCommand());
     }
 }
