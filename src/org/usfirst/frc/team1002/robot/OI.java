@@ -2,7 +2,6 @@ package org.usfirst.frc.team1002.robot;
 
 import org.usfirst.frc.team1002.robot.commands.Fork;
 import org.usfirst.frc.team1002.robot.commands.Lift;
-import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -39,15 +38,5 @@ public class OI {
 	// Fork arms stop on button release
 	forkIn.whenReleased(new Fork(0));
 	forkOut.whenReleased(new Fork(0));
-
-	// Switch between Cartesian and polar
-	if (cartesianToggle.get()) {
-	    Drive.isCartesian = !Drive.isCartesian;
-	}
-
-	// Reset the gyro angle
-	if (gyroReset.get()) {
-	    Drive.gyro.reset();
-	}
     }
 }
