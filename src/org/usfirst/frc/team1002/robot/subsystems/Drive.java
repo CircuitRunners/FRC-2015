@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
+import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -102,6 +103,9 @@ public class Drive extends Subsystem {
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(GenericHID joystick) {
+	// Change the multiplier
+	if (Robot.xbox.getRawButton(5)) Drive.multiplier = 0.5;
+	else if (Robot.xbox.getRawButton(6)) Drive.multiplier = 1;
 	if (isCartesian) {
 	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)),
 		    gyro.getAngle()); // Bad

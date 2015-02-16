@@ -61,10 +61,6 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
 	Scheduler.getInstance().run();
 
-	// Change the multiplier
-	if (Robot.xbox.getRawButton(5)) Drive.multiplier = 0.5;
-	else if (Robot.xbox.getRawButton(6)) Drive.multiplier = 1;
-
 	// Drive the robot
 	Drive.move(xbox);
 
