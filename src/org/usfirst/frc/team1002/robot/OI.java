@@ -8,16 +8,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
     JoystickButton upButton;
     JoystickButton downButton;
-    JoystickButton gyroReset;
-    JoystickButton cartesianToggle;
     JoystickButton forkIn;
     JoystickButton forkOut;
 
     public OI() {
 	upButton = new JoystickButton(Robot.xbox, 4);
 	downButton = new JoystickButton(Robot.xbox, 1);
-	gyroReset = new JoystickButton(Robot.xbox, 7);
-	cartesianToggle = new JoystickButton(Robot.xbox, 8);
 	forkIn = new JoystickButton(Robot.xbox, 3);
 	forkOut = new JoystickButton(Robot.xbox, 2);
 
@@ -32,8 +28,8 @@ public class OI {
 	downButton.whenReleased(new Lift(0));
 
 	// Fork arms go in/out on button press
-	forkIn.whileHeld(new Fork(-1));
-	forkOut.whileHeld(new Fork(0.666));
+	forkIn.whileHeld(new Fork(1));
+	forkOut.whileHeld(new Fork(-0.666));
 
 	// Fork arms stop on button release
 	forkIn.whenReleased(new Fork(0));

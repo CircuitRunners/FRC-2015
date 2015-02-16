@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1002.robot;
 
 import org.usfirst.frc.team1002.robot.commands.Auto;
+import org.usfirst.frc.team1002.robot.commands.PublishValues;
 import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
@@ -49,6 +50,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+	Scheduler.getInstance().add(new PublishValues());
     }
 
     @Override

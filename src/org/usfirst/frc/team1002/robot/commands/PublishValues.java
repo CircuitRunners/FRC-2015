@@ -30,8 +30,8 @@ public class PublishValues extends Command {
 	} else {
 	    driveType = "Polar";
 	}
-	Dashboard.publish(((Double) Robot.xbox.getX()).toString(), ((Double) Robot.xbox.getY()).toString(),
-		((Double) Robot.xbox.getTwist()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
+	Dashboard.publish(((Double) Robot.xbox.getX()).toString().substring(0, 5), ((Double) Robot.xbox.getY()).toString().substring(0, 5),
+		((Double) Robot.xbox.getRawAxis(4)).toString().substring(0, 5), ((Boolean) Forklift.limitSensorBot.get()).toString(),
 		((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString(), driveType);
     }
 
