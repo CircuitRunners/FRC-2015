@@ -134,7 +134,7 @@ public class Drive extends Subsystem {
      * @param input is the raw input from the joystick
      * @return
      */
-    private static double throttle(double input) {
+    public static double throttle(double input) {
 	double output = input;
 	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
 	    output = 0; // If within deadzone then don't move to stop unintended
@@ -149,7 +149,7 @@ public class Drive extends Subsystem {
      * @param input is the raw input from the joystick
      * @return
      */
-    private static double spinThrottle(double input) {
+    public static double spinThrottle(double input) {
 	double output = input;
 	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
 	    output = 0;
