@@ -45,32 +45,32 @@ public class Drive extends Subsystem {
     private static final double STICK_POWER = 2;
 
     public Drive() {
-	leftFrontMotor = new Victor(RobotMap.motors[0]);
-	rightFrontMotor = new Victor(RobotMap.motors[1]);
-	rightBackMotor = new Victor(RobotMap.motors[2]);
-	leftBackMotor = new Victor(RobotMap.motors[3]);
+        leftFrontMotor = new Victor(RobotMap.motors[0]);
+        rightFrontMotor = new Victor(RobotMap.motors[1]);
+        rightBackMotor = new Victor(RobotMap.motors[2]);
+        leftBackMotor = new Victor(RobotMap.motors[3]);
 
-	gyro = new Gyro(RobotMap.gyro);
+        gyro = new Gyro(RobotMap.gyro);
 
-	/*
-	 * leftFrontEncoder = new Encoder(RobotMap.encoders[0][0],
-	 * RobotMap.encoders[0][1]); rightFrontEncoder = new
-	 * Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
-	 * rightBackEncoder = new Encoder(RobotMap.encoders[2][0],
-	 * RobotMap.encoders[2][1]); leftBackEncoder = new
-	 * Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
-	 * leftFrontEncoder.reset(); rightFrontEncoder.reset();
-	 * rightBackEncoder.reset(); leftBackEncoder.reset();
-	 * leftFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	 * rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	 * rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	 * leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-	 */
+        /*
+         * leftFrontEncoder = new Encoder(RobotMap.encoders[0][0],
+         * RobotMap.encoders[0][1]); rightFrontEncoder = new
+         * Encoder(RobotMap.encoders[1][0], RobotMap.encoders[1][1]);
+         * rightBackEncoder = new Encoder(RobotMap.encoders[2][0],
+         * RobotMap.encoders[2][1]); leftBackEncoder = new
+         * Encoder(RobotMap.encoders[3][0], RobotMap.encoders[3][1]);
+         * leftFrontEncoder.reset(); rightFrontEncoder.reset();
+         * rightBackEncoder.reset(); leftBackEncoder.reset();
+         * leftFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+         * rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+         * rightBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+         * leftBackEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+         */
 
-	robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
+        robotDrive = new RobotDrive(leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor);
 
-	robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     }
 
     /**
@@ -82,38 +82,40 @@ public class Drive extends Subsystem {
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(double x, double y, double rotation) {
-	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle()); // Bad
-	    // drive
-	    // pretend
-	    // it
-	    // doesn't
-	    // exist
-	} else {
-	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0); // "Polar"
-	    // drive
-	}
+        if (isCartesian) {
+            robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle()); // Bad
+                                                                                // drive
+                                                                                // pretend
+                                                                                // it
+                                                                                // doesn't
+                                                                                // exist
+        } else {
+            robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0); // "Polar"
+                                                                  // drive
+        }
     }
 
     /**
      * Alternate move function. Takes joystick input and automatically throttles
      * and sets.
      *
-     * @param joystick is the joystick used
+     * @param joystickis the joystick used
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(GenericHID joystick) {
-	// Change the multiplier
-	if (Robot.xbox.getRawButton(5)) Drive.multiplier = 0.5;
-	else if (Robot.xbox.getRawButton(6)) Drive.multiplier = 1;
-	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)),
-		    gyro.getAngle()); // Bad
-				      // special
-				      // drive
-	} else {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getRawAxis(4)), 0);
-	} // "Polar" drive from joystick
+        // Change the multiplier
+        if (Robot.xbox.getRawButton(5)) {
+            Drive.multiplier = 0.5;
+        } else if (Robot.xbox.getRawButton(6)) {
+            Drive.multiplier = 1;
+        }
+        if (isCartesian) {
+            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()),
+                    spinThrottle(joystick.getRawAxis(4)), gyro.getAngle());
+        } else {
+            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()),
+                    spinThrottle(joystick.getRawAxis(4)), 0);
+        }
     }
 
     /**
@@ -132,33 +134,33 @@ public class Drive extends Subsystem {
      * Throttles joystick input using a deadzone and throttle scaler
      *
      * @param input is the raw input from the joystick
-     * @return
+     * @return throttled input
      */
     public static double throttle(double input) {
-	double output = input;
-	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
-	    output = 0; // If within deadzone then don't move to stop unintended
-			// inputs and ghost inputs
-	}
-	return specPow(output, STICK_POWER) * multiplier;
+        double output = input;
+        if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
+            output = 0; // If within deadzone then don't move to stop unintended
+            // inputs and ghost inputs
+        }
+        return specPow(output, STICK_POWER) * multiplier;
     }
 
     /**
      * Throttles joystick twist input using a deadzone and throttle scaler
      *
      * @param input is the raw input from the joystick
-     * @return
+     * @return throttled spin input
      */
     public static double spinThrottle(double input) {
-	double output = input;
-	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
-	    output = 0;
-	}
-	return SPIN_REDUCTION_CONSTANT * specPow(output, SPIN_POWER) * multiplier;
+        double output = input;
+        if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
+            output = 0;
+        }
+        return SPIN_REDUCTION_CONSTANT * specPow(output, SPIN_POWER) * multiplier;
     }
 
     private static double specPow(double base, double exp) {
-	return Math.signum(base) * Math.abs(Math.pow(base, exp));
+        return Math.signum(base) * Math.abs(Math.pow(base, exp));
     }
 
     @Override

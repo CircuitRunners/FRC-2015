@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PublishValues extends Command {
 
     public PublishValues() {
-	requires(Robot.dash);
+        requires(Robot.dash);
     }
 
     // Called just before this Command runs the first time
@@ -24,21 +24,19 @@ public class PublishValues extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-	String driveType;
-	if (Drive.isCartesian) {
-	    driveType = "Cartesian";
-	} else {
-	    driveType = "Polar";
-	}
-	Dashboard.publish(((Double) Drive.throttle(Robot.xbox.getX())).toString(), ((Double) Drive.throttle(Robot.xbox.getY())).toString(),
-		((Double) Drive.spinThrottle(Robot.xbox.getRawAxis(4))).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
-		((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString(), driveType);
+        String driveType;
+        if (Drive.isCartesian) {
+            driveType = "Cartesian";
+        } else {
+            driveType = "Polar";
+        }
+        Dashboard.publish(((Double) Drive.throttle(Robot.xbox.getX())).toString(), ((Double) Drive.throttle(Robot.xbox.getY())).toString(), ((Double) Drive.spinThrottle(Robot.xbox.getRawAxis(4))).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(), ((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString(), driveType);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-	return false;
+        return false;
     }
 
     // Called once after isFinished returns true

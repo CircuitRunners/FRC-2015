@@ -1,17 +1,24 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
+import org.usfirst.frc.team1002.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Lift extends Command {
+/**
+ *
+ */
+public class Move extends Command {
 
-    private final double speed;
+    private static double x;
+    private static double y;
+    private static double rotation;
 
-    public Lift(double speedIn) {
-        requires(Robot.forklift);
-        speed = speedIn;
+    public Move(double x, double y, double rotation) {
+        requires(Robot.drive);
+        Move.x = x;
+        Move.y = y;
+        Move.rotation = rotation;
     }
 
     @Override
@@ -20,21 +27,19 @@ public class Lift extends Command {
 
     @Override
     protected void execute() {
-        Forklift.lift(speed);
+        Drive.move(x, y, rotation);
     }
 
     @Override
     protected boolean isFinished() {
-        return speed == 0;
+        return false;
     }
 
     @Override
     protected void end() {
-        Forklift.lift(0);
     }
 
     @Override
     protected void interrupted() {
-        Forklift.lift(0);
     }
 }

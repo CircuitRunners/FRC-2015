@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Fork extends Command {
-    private double speed;
+    private final double speed;
 
     public Fork(double speedIn) {
-	requires(Robot.forklift);
-	this.speed = speedIn;
+        requires(Robot.forklift);
+        speed = speedIn;
     }
 
     @Override
@@ -22,21 +22,21 @@ public class Fork extends Command {
 
     @Override
     protected void execute() {
-	Forklift.fork(this.speed);
+        Forklift.fork(speed);
     }
 
     @Override
     protected boolean isFinished() {
-	return this.speed == 0;
+        return speed == 0;
     }
 
     @Override
     protected void end() {
-	Forklift.fork(0);
+        Forklift.fork(0);
     }
 
     @Override
     protected void interrupted() {
-	Forklift.fork(0);
+        Forklift.fork(0);
     }
 }
