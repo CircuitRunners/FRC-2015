@@ -16,7 +16,6 @@ public class Robot extends IterativeRobot {
     // Static Instances of subsystems
     public static final Joystick joystickMove = new Joystick(RobotMap.stick[0]);
     public static final Joystick joystickFork = new Joystick(RobotMap.stick[1]);
-    public static final Joystick joystickThrottle = new Joystick(RobotMap.stick[2]);
     public static final Drive drive = new Drive();
     public static final Forklift forklift = new Forklift();
     public static final Dashboard dash = new Dashboard();
@@ -28,7 +27,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-	oi = new OI();
+	oi = new OI(joystickMove, joystickFork);
 	camera = new AxisCamera("10.10.2.11");
     }
 
