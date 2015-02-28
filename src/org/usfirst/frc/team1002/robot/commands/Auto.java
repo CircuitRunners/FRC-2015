@@ -33,14 +33,14 @@ public class Auto extends Command {
 	Drive.move(0, 0, 0);
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.fork(1);
+	    Forklift.forkMotor.set(1);
 	}
-	Forklift.fork(0);
+	Forklift.forkMotor.set(0);
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 0.5) {
-	    Forklift.lift(1);
+	    Forklift.liftMotor.set(1);
 	}
-	Forklift.lift(0);
+	Forklift.liftMotor.set(0);
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 2) {
 	    Drive.move(0, 0.5, 0);
@@ -55,14 +55,14 @@ public class Auto extends Command {
 	}
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.lift(-1);
+	    Forklift.liftMotor.set(-1);
 	}
 	Forklift.liftMotor.set(0);
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.fork(-1);
+	    Forklift.forkMotor.set(-1);
 	}
-	Forklift.fork(0);
+	Forklift.forkMotor.set(0);
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 1) {
 	    Drive.move(0, 0.25, 0);
