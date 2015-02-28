@@ -30,40 +30,40 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-	oi = new OI(joystickMove, joystickFork);
-	camera = new AxisCamera("10.10.2.11");
-	auto = new Auto();
+        oi = new OI(joystickMove, joystickFork);
+        camera = new AxisCamera("10.10.2.11");
+        auto = new Auto();
     }
 
     @Override
     public void disabledPeriodic() {
-	Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     @Override
     public void autonomousInit() {
-	Scheduler.getInstance().add(auto);
+        Scheduler.getInstance().add(auto);
     }
 
     @Override
     public void autonomousPeriodic() {
-	Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     @Override
     public void teleopInit() {
-	auto.cancel();
+        auto.cancel();
     }
 
     @Override
     public void teleopPeriodic() {
-	Scheduler.getInstance().run();
-	// Drive the robot
-	Drive.move(joystickMove);
+        Scheduler.getInstance().run();
+        // Drive the robot
+        Drive.move(joystickMove);
     }
 
     @Override
     public void testPeriodic() {
-	LiveWindow.run();
+        LiveWindow.run();
     }
 }

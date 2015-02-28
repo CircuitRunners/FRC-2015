@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PublishValues extends Command {
 
     public PublishValues() {
-	requires(Robot.dash);
+        requires(Robot.dash);
     }
 
     @Override
@@ -21,14 +21,14 @@ public class PublishValues extends Command {
 
     @Override
     protected void execute() {
-	Dashboard.publish(((Double) Robot.joystickMove.getX()).toString(), ((Double) Robot.joystickMove.getY()).toString(),
-		((Double) Robot.joystickMove.getTwist()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
-		((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString());
+        Dashboard.publish(((Double) Robot.joystickMove.getX()).toString(), ((Double) Robot.joystickMove.getY()).toString(),
+                ((Double) Robot.joystickMove.getTwist()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
+                ((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString());
     }
 
     @Override
     protected boolean isFinished() {
-	return false;
+        return false;
     }
 
     @Override

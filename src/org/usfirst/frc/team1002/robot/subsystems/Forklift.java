@@ -21,17 +21,17 @@ public class Forklift extends Subsystem {
     public static DigitalInput limitSensorFork;
 
     public Forklift() {
-	liftMotor = new CANTalon(RobotMap.liftMotor);
-	forkMotor = new Talon(RobotMap.forkMotor);
-	limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
-	limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
-	limitSensorFork = new DigitalInput(RobotMap.limitSwitches[2]);
-	lift(0);
+        liftMotor = new CANTalon(RobotMap.liftMotor);
+        forkMotor = new Talon(RobotMap.forkMotor);
+        limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
+        limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
+        limitSensorFork = new DigitalInput(RobotMap.limitSwitches[2]);
+        lift(0);
     }
 
     @Override
     public void initDefaultCommand() {
-	setDefaultCommand(new Lift(0));
+        setDefaultCommand(new Lift(0));
     }
 
     /**
@@ -40,12 +40,16 @@ public class Forklift extends Subsystem {
      * @param speed is the speed to lift the forklift
      */
     public static void lift(double speed) {
-	if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
-	liftMotor.set(speed);
+        if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) {
+            speed = 0;
+        }
+        liftMotor.set(speed);
     }
 
     public static void fork(double speed) {
-	if (!limitSensorFork.get() && speed < 0 && !Dashboard.getButton(1)) speed = 0;
-	forkMotor.set(speed);
+        if (!limitSensorFork.get() && speed < 0 && !Dashboard.getButton(1)) {
+            speed = 0;
+        }
+        forkMotor.set(speed);
     }
 }
