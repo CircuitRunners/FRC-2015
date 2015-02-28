@@ -54,4 +54,7 @@ public class Dashboard extends Subsystem {
 	}
     }
 
+    public static boolean getButton(int number) {
+	return SmartDashboard.getBoolean("DB/Button " + number);
+    }
 }
