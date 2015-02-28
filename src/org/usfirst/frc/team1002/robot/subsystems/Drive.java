@@ -34,8 +34,6 @@ public class Drive extends Subsystem {
     // RobotDrive
     public static RobotDrive robotDrive;
 
-    public static boolean isCartesian = false;
-
     // Deadzone Constants
     public static final double SPIN_DEADZONE_CONSTANT = 0.1;
     public static final double STICK_DEADZONE_CONSTANT = 0.15;
@@ -78,11 +76,7 @@ public class Drive extends Subsystem {
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(double x, double y, double rotation) {
-        if (isCartesian) {
-            robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
-        } else {
-            robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
-        }
+        robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
     }
 
     /**
@@ -93,13 +87,7 @@ public class Drive extends Subsystem {
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(GenericHID joystick) {
-        if (isCartesian) {
-            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()),
-                    gyro.getAngle());
-        } else {
-            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()),
-                    0);
-        }
+        robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
     }
 
     /**
