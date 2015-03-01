@@ -23,19 +23,16 @@ public class Drive extends Subsystem {
     // Gyro
     public static Gyro gyro;
 
-    /* Encoders
-    public static Encoder leftFrontEncoder;
-    public static Encoder rightFrontEncoder;
-    public static Encoder leftBackEncoder;
-    public static Encoder rightBackEncoder;
-    */
+    /*
+     * Encoders public static Encoder leftFrontEncoder; public static Encoder
+     * rightFrontEncoder; public static Encoder leftBackEncoder; public static
+     * Encoder rightBackEncoder;
+     */
 
     // private static final double DISTANCE_PER_PULSE = 0;
 
     // RobotDrive
     public static RobotDrive robotDrive;
-
-    public static boolean isCartesian = false;
 
     // Deadzone Constants
     public static final double SPIN_DEADZONE_CONSTANT = 0.1;
@@ -76,14 +73,25 @@ public class Drive extends Subsystem {
      * @param x is the speed to move in the x-direction
      * @param y is the speed to move in the y-direction
      * @param rotation is the speed to rotate
-     * @param isCartesian defines whether Cartesian or polar is to be used
+     * @param cartesian defines whether Cartesian or polar is to be used
      */
-    public static void move(double x, double y, double rotation) {
-	if (isCartesian) {
+    public static void move(double x, double y, double rotation, boolean cartesian) {
+	if (cartesian) {
 	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
 	} else {
 	    robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
 	}
+    }
+
+    /**
+     * Default move function. Polar is used unless changed.
+     * 
+     * @param x is the speed to move in the x-direction
+     * @param y is the speed to move in the y-direction
+     * @param rotation is the speed to rotate
+     */
+    public static void move(double x, double y, double rotation) {
+	robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
     }
 
     /**
@@ -94,11 +102,7 @@ public class Drive extends Subsystem {
      * @param isCartesian defines whether Cartesian or polar is to be used
      */
     public static void move(GenericHID joystick) {
-	if (isCartesian) {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), gyro.getAngle());
-	} else {
-	    robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
-	}
+	robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
     }
 
     /**
@@ -120,11 +124,8 @@ public class Drive extends Subsystem {
      * @return
      */
     private static double throttle(double input) {
-	double output = input;
-	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
-	    output = 0;
-	}
-	return output * ((-Robot.joystickMove.getThrottle() + 1) / 2);
+	if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) { return 0; }
+	return input * ((-Robot.joystickMove.getThrottle() + 1) / 2);
     }
 
     /**
@@ -134,11 +135,8 @@ public class Drive extends Subsystem {
      * @return
      */
     private static double spinThrottle(double input) {
-	double output = input;
-	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
-	    output = 0;
-	}
-	return output * ((-Robot.joystickMove.getThrottle() + 1) / 2) * 0.5;
+	if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) { return 0; }
+	return input * ((-Robot.joystickMove.getThrottle() + 1) / 2) * 0.5;
     }
 
     @Override

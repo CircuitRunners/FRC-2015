@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
+import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
 import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
@@ -25,6 +26,28 @@ public class Auto extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+	if (Dashboard.getButton(2)) workingAuto();
+	else if (Dashboard.getButton(3)) testAuto();
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    protected boolean isFinished() {
+	return true;
+    }
+
+    // Called once after isFinished returns true
+    @Override
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    @Override
+    protected void interrupted() {
+    }
+
+    private static void workingAuto() {
 	double time;
 	time = Timer.getFPGATimestamp();
 	while (Timer.getFPGATimestamp() - time < 1) {
@@ -69,20 +92,12 @@ public class Auto extends Command {
 	}
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-	return true;
-    }
-
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
+    private static void testAuto() {
+	double time;
+	time = Timer.getFPGATimestamp();
+	while (Timer.getFPGATimestamp() - time < 1) {
+	    Drive.move(0, -0.25, 0);
+	}
+	Drive.move(0, 0, 0);
     }
 }

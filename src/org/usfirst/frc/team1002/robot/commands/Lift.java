@@ -14,8 +14,17 @@ public class Lift extends Command {
 	this.speed = speedIn;
     }
 
+    public Lift(double speedIn, double runTime) {
+	requires(Robot.forklift);
+	this.speed = speedIn;
+	this.timeout = runTime;
+    }
+
     @Override
     protected void initialize() {
+	if (timeout != 0) {
+	    setTimeout(timeout);
+	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +36,8 @@ public class Lift extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-	return this.speed == 0;
+	if (timeout == 0) { return this.speed == 0; }
+	return this.speed == 0 || isTimedOut();
     }
 
     // Called once after isFinished returns true
