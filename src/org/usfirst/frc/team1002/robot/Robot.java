@@ -3,11 +3,12 @@ package org.usfirst.frc.team1002.robot;
 import org.usfirst.frc.team1002.robot.commands.Auto;
 import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
+import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
+import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
@@ -18,7 +19,8 @@ public class Robot extends IterativeRobot {
     public static final Joystick joystickMove = new Joystick(RobotMap.stick[0]);
     public static final Joystick joystickFork = new Joystick(RobotMap.stick[1]);
     public static final Drive drive = new Drive();
-    public static final Forklift forklift = new Forklift();
+    public static final ForkSystem forkSystem = new ForkSystem();
+    public static final LiftSystem liftSystem = new LiftSystem();
     public static final Dashboard dash = new Dashboard();
 
     // Secondary handlers
@@ -28,7 +30,7 @@ public class Robot extends IterativeRobot {
     public static AxisCamera camera;
 
     // Auto
-    Command auto;
+    CommandGroup auto;
 
     @Override
     public void robotInit() {
@@ -54,13 +56,12 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-	auto.cancel();
+	if (!auto.isCanceled() && auto != null) auto.cancel();
     }
 
     @Override
     public void teleopPeriodic() {
 	Scheduler.getInstance().run();
-	// Drive the robot
 	Drive.move(joystickMove);
     }
 

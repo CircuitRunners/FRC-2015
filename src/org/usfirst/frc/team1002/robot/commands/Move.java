@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1002.robot.commands;
 
+import org.usfirst.frc.team1002.robot.Robot;
+import org.usfirst.frc.team1002.robot.subsystems.Drive;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,30 +10,103 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Move extends Command {
 
-    public Move() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    private double x;
+    private double y;
+    private double rotation;
+    private boolean cartesian;
+    private double timeout;
+
+    /**
+     * Default move function. Polar is used.
+     * 
+     * @param xIn The speed to move in the x-direction.
+     * @param yIn The speed to move in the y-direction.
+     * @param rotationIn The speed to rotate.
+     */
+    public Move(double xIn, double yIn, double rotationIn) {
+	requires(Robot.drive);
+	x = xIn;
+	y = yIn;
+	rotation = rotationIn;
+	cartesian = false;
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Default move function. Polar is used unless set.
+     * 
+     * @param xIn The speed to move in the x-direction.
+     * @param yIn The speed to move in the y-direction.
+     * @param rotationIn The speed to rotate.
+     * @param cartesian Use cartesian instead of polar.
+     */
+    public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn) {
+	requires(Robot.drive);
+	x = xIn;
+	y = yIn;
+	rotation = rotationIn;
+	cartesian = cartesianIn;
+    }
+
+    /**
+     * Default move function. Polar is used unless set.
+     * 
+     * @param xIn The speed to move in the x-direction.
+     * @param yIn The speed to move in the y-direction.
+     * @param rotationIn The speed to rotate.
+     * @param cartesian Use cartesian instead of polar.
+     * @param timeOut The delay in seconds to stop moving.
+     */
+    public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn, double runTime) {
+	requires(Robot.drive);
+	x = xIn;
+	y = yIn;
+	rotation = rotationIn;
+	cartesian = cartesianIn;
+	timeout = runTime;
+    }
+
+    /**
+     * Default move function. Polar is used.
+     * 
+     * @param xIn The speed to move in the x-direction.
+     * @param yIn The speed to move in the y-direction.
+     * @param rotationIn The speed to rotate.
+     * @param timeOut The delay in seconds to stop moving.
+     */
+    public Move(double xIn, double yIn, double rotationIn, double runTime) {
+	requires(Robot.drive);
+	x = xIn;
+	y = yIn;
+	rotation = rotationIn;
+	cartesian = false;
+	timeout = runTime;
+    }
+
+    @Override
     protected void initialize() {
+	if (timeout != 0) {
+	    setTimeout(timeout);
+	}
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
+	Drive.move(x, y, rotation, cartesian);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
-        return false;
+	if (timeout == 0) { return x == 0 && y == 0 && rotation == 0; }
+	return (x == 0 && y == 0 && rotation == 0) || isTimedOut();
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
+	Drive.move(0, 0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
+	Drive.move(0, 0, 0);
     }
 }
