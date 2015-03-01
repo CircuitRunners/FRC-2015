@@ -7,25 +7,24 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
-    JoystickButton upButton;
-    JoystickButton downButton;
+    JoystickButton liftUpButton;
+    JoystickButton liftDownButton;
     JoystickButton gyroReset;
     JoystickButton cartesianToggle;
     JoystickButton forkIn;
     JoystickButton forkOut;
 
     public OI(GenericHID... joystick) {
-	this.upButton = new JoystickButton(joystick[0], 5);
-	this.downButton = new JoystickButton(joystick[0], 3);
+	this.liftUpButton = new JoystickButton(joystick[0], 5);
+	this.liftDownButton = new JoystickButton(joystick[0], 3);
 	this.forkIn = new JoystickButton(joystick[0], 1);
 	this.forkOut = new JoystickButton(joystick[0], 2);
 
-	// Forklift
-	this.upButton.whileHeld(new Lift(1));
-	this.downButton.whileHeld(new Lift(-1));
+	this.liftUpButton.whileHeld(new Lift(1));
+	this.liftDownButton.whileHeld(new Lift(-1));
 
-	this.upButton.whenReleased(new Lift(0));
-	this.downButton.whenReleased(new Lift(0));
+	this.liftUpButton.whenReleased(new Lift(0));
+	this.liftDownButton.whenReleased(new Lift(0));
 
 	this.forkIn.whileHeld(new Fork(1));
 	this.forkOut.whileHeld(new Fork(-0.666));

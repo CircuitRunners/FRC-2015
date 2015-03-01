@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 public class Robot extends IterativeRobot {
 
-    // Static Instances of subsystems
+    // Static instances of systems
     public static final Joystick joystickMove = new Joystick(RobotMap.stick[0]);
     public static final Joystick joystickFork = new Joystick(RobotMap.stick[1]);
     public static final Drive drive = new Drive();
@@ -23,8 +23,10 @@ public class Robot extends IterativeRobot {
 
     // Secondary handlers
     public static OI oi;
+
     // Camera
     public static AxisCamera camera;
+
     // Auto
     Command auto;
 
