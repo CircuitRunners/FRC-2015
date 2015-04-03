@@ -7,29 +7,27 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
-    JoystickButton liftUpButton;
-    JoystickButton liftDownButton;
-    JoystickButton gyroReset;
-    JoystickButton cartesianToggle;
+    JoystickButton upButton;
+    JoystickButton downButton;
     JoystickButton forkIn;
     JoystickButton forkOut;
 
     public OI(GenericHID... joystick) {
-	this.liftUpButton = new JoystickButton(joystick[0], 5);
-	this.liftDownButton = new JoystickButton(joystick[0], 3);
-	this.forkIn = new JoystickButton(joystick[0], 1);
-	this.forkOut = new JoystickButton(joystick[0], 2);
+		upButton = new JoystickButton(joystick[1], 5);
+		downButton = new JoystickButton(joystick[1], 3);
+		forkIn = new JoystickButton(joystick[1], 1);
+		forkOut = new JoystickButton(joystick[1], 2);
+		
+		upButton.whileHeld(new Lift(1));
+		downButton.whileHeld(new Lift(-1));
 
-	this.liftUpButton.whileHeld(new Lift(1));
-	this.liftDownButton.whileHeld(new Lift(-1));
+		upButton.whenReleased(new Lift(0));
+		downButton.whenReleased(new Lift(0));
 
-	this.liftUpButton.whenReleased(new Lift(0));
-	this.liftDownButton.whenReleased(new Lift(0));
+		forkIn.whileHeld(new Fork(1));
+		forkOut.whileHeld(new Fork(-0.666));
 
-	this.forkIn.whileHeld(new Fork(1));
-	this.forkOut.whileHeld(new Fork(-0.666));
-
-	this.forkIn.whenReleased(new Fork(0));
-	this.forkOut.whenReleased(new Fork(0));
+		forkIn.whenReleased(new Fork(0));
+		forkOut.whenReleased(new Fork(0));
     }
 }

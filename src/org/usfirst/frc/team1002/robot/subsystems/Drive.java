@@ -6,7 +6,7 @@ import org.usfirst.frc.team1002.robot.RobotMap;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
 
     // Motors
-    public static Victor leftFrontMotor;
-    public static Victor rightFrontMotor;
-    public static Victor leftBackMotor;
-    public static Victor rightBackMotor;
+    public static VictorSP leftFrontMotor;
+    public static VictorSP rightFrontMotor;
+    public static VictorSP leftBackMotor;
+    public static VictorSP rightBackMotor;
 
     // Gyro
     public static Gyro gyro;
@@ -31,10 +31,10 @@ public class Drive extends Subsystem {
     public static final double STICK_DEADZONE_CONSTANT = 0.15;
 
     public Drive() {
-	leftFrontMotor = new Victor(RobotMap.motors[0]);
-	rightFrontMotor = new Victor(RobotMap.motors[1]);
-	rightBackMotor = new Victor(RobotMap.motors[2]);
-	leftBackMotor = new Victor(RobotMap.motors[3]);
+	leftFrontMotor = new VictorSP(RobotMap.motors[0]);
+	rightFrontMotor = new VictorSP(RobotMap.motors[1]);
+	rightBackMotor = new VictorSP(RobotMap.motors[2]);
+	leftBackMotor = new VictorSP(RobotMap.motors[3]);
 
 	gyro = new Gyro(RobotMap.gyro);
 
