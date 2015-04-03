@@ -3,6 +3,7 @@ package org.usfirst.frc.team1002.robot;
 import org.usfirst.frc.team1002.robot.commands.Auto;
 import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.Drive;
+import org.usfirst.frc.team1002.robot.subsystems.ExtArmSystem;
 import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
@@ -20,6 +21,7 @@ public class Robot extends IterativeRobot {
 	public static final Drive drive = new Drive();
 	public static final ForkSystem forkSystem = new ForkSystem();
 	public static final LiftSystem liftSystem = new LiftSystem();
+	public static final ExtArmSystem extArmSystem = new ExtArmSystem();
 	public static final Dashboard dash = new Dashboard();
 
 	// Secondary handlers

@@ -13,4 +13,6 @@ public class RobotMap {
 	public static final int liftMotor = 0;
 	// fork motor
 	public static final int forkMotor = 4;
+	// extention arm motor
+	public static final int extMotor = 5;
 }

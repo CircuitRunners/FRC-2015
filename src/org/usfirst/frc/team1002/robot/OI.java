@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1002.robot;
 
+import org.usfirst.frc.team1002.robot.commands.ExtArm;
 import org.usfirst.frc.team1002.robot.commands.Fork;
 import org.usfirst.frc.team1002.robot.commands.Lift;
 
@@ -12,6 +13,8 @@ public class OI {
 	JoystickButton liftDownButton;
 	JoystickButton forkInButton;
 	JoystickButton forkOutButton;
+	JoystickButton extGrabButton;
+	JoystickButton extThrowButton;
 	GenericHID[] joysticks;
 
 	/**
@@ -26,6 +29,8 @@ public class OI {
 		liftDownButton = new JoystickButton(joysticks[0], 3);
 		forkInButton = new JoystickButton(joysticks[0], 1);
 		forkOutButton = new JoystickButton(joysticks[0], 2);
+		extGrabButton = new JoystickButton(joysticks[0], 6);
+		extThrowButton = new JoystickButton(joysticks[0], 4);
 
 		// button controls
 		liftUpButton.whileHeld(new Lift(1));
@@ -39,5 +44,11 @@ public class OI {
 
 		forkInButton.whenReleased(new Fork(0));
 		forkOutButton.whenReleased(new Fork(0));
+
+		extGrabButton.whileHeld(new ExtArm(0.5));
+		extThrowButton.whileHeld(new ExtArm(-0.5));
+
+		extGrabButton.whenReleased(new ExtArm(0));
+		extThrowButton.whenReleased(new ExtArm(0));
 	}
 }
