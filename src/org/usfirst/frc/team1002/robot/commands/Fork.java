@@ -5,63 +5,58 @@ import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class Fork extends Command {
-    private double speed;
-    private double timeout;
+	private final double speed;
+	private final double timeout;
 
-    /**
-     * Opens or closes the forks.
-     * 
-     * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
-     * forks.
-     */
-    public Fork(double speedIn) {
+	/**
+	 * Opens or closes the forks.
+	 * 
+	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+	 * forks.
+	 */
+	public Fork(double speedIn) {
 		requires(Robot.forkSystem);
-		this.speed = speedIn;
-		this.timeout = 0;
-    }
+		speed = speedIn;
+		timeout = 0;
+	}
 
-    /**
-     * Opens or closes the forks.
-     * 
-     * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
-     * forks.
-     * @param runTime The delay in seconds to stop the fork.
-     */
-    public Fork(double speedIn, double runTime) {
+	/**
+	 * Opens or closes the forks.
+	 * 
+	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+	 * forks.
+	 * @param runTime The delay in seconds to stop the fork.
+	 */
+	public Fork(double speedIn, double runTime) {
 		requires(Robot.forkSystem);
-		this.speed = speedIn;
-		this.timeout = runTime;
-    }
+		speed = speedIn;
+		timeout = runTime;
+	}
 
-    @Override
-    protected void initialize() {
-		if (timeout != 0) {
-		    setTimeout(timeout);
-		}
-    }
+	@Override
+	protected void end() {
+		ForkSystem.fork(0);
+	}
 
-    @Override
-    protected void execute() {
-    	ForkSystem.fork(this.speed);
-    }
+	@Override
+	protected void execute() {
+		ForkSystem.fork(speed);
+	}
 
-    @Override
-    protected boolean isFinished() {
-		if (timeout == 0) { return this.speed == 0; }
-		return this.speed == 0 || isTimedOut();
-    }
+	@Override
+	protected void initialize() {
+		if (timeout != 0) setTimeout(timeout);
+	}
 
-    @Override
-    protected void end() {
-    	ForkSystem.fork(0);
-    }
+	@Override
+	protected void interrupted() {
+		ForkSystem.fork(0);
+	}
 
-    @Override
-    protected void interrupted() {
-    	ForkSystem.fork(0);
-    }
+	@Override
+	protected boolean isFinished() {
+		if (timeout == 0) return speed == 0;
+		return speed == 0 || isTimedOut();
+	}
 }

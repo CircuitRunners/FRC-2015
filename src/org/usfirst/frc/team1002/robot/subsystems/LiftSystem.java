@@ -7,29 +7,26 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class LiftSystem extends Subsystem {
-    public static CANTalon liftMotor;
+	public static CANTalon liftMotor;
 
-    public static DigitalInput limitSensorTop;
-    public static DigitalInput limitSensorBot;
+	public static DigitalInput limitSensorTop;
+	public static DigitalInput limitSensorBot;
 
-    public LiftSystem() {
+	public static void lift(double speed) {
+		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
+		liftMotor.set(speed);
+	}
+
+	public LiftSystem() {
 		liftMotor = new CANTalon(RobotMap.liftMotor);
 		limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
 		limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
 		lift(0);
-    }
+	}
 
-    @Override
-    public void initDefaultCommand() {
-    	setDefaultCommand(new Lift(0));
-    }
-
-    public static void lift(double speed) {
-		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
-		liftMotor.set(speed);
-    }
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new Lift(0));
+	}
 }
