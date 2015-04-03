@@ -4,7 +4,7 @@ public class RobotMap {
 	// motor ports
 	public static final int[] motors = { 0, 1, 2, 3 };
 	// joystick port
-	public static final int[] stick = { 0, 1, 2 };
+	public static final int[] stick = { 0 };
 	// gyro
 	public static final int gyro = 0;
 	// limit switches

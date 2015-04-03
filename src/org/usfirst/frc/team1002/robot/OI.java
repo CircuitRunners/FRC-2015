@@ -20,8 +20,6 @@ public class OI {
 	 * @param joysticks The joysticks used for buttons
 	 */
 	public OI(GenericHID... joysticks) {
-		// collect joysticks for later use
-		this.joysticks = joysticks;
 
 		// button map
 		upButton = new JoystickButton(joysticks[0], 5);
@@ -41,48 +39,5 @@ public class OI {
 
 		forkIn.whenReleased(new Fork(0));
 		forkOut.whenReleased(new Fork(0));
-	}
-
-	/**
-	 *
-	 */
-	public void override() {
-		if (joysticks[0].getRawButton(5) || joysticks[0].getRawButton(3) || joysticks[0].getRawButton(1) || joysticks[0].getRawButton(2) || joysticks[0].getRawButton(12)) {
-			// button map
-			upButton = new JoystickButton(joysticks[0], 5);
-			downButton = new JoystickButton(joysticks[0], 3);
-			forkIn = new JoystickButton(joysticks[0], 1);
-			forkOut = new JoystickButton(joysticks[0], 2);
-
-			upButton.whileHeld(new Lift(1));
-			downButton.whileHeld(new Lift(-1));
-
-			upButton.whenReleased(new Lift(0));
-			downButton.whenReleased(new Lift(0));
-
-			forkIn.whileHeld(new Fork(1));
-			forkOut.whileHeld(new Fork(-0.666));
-
-			forkIn.whenReleased(new Fork(0));
-			forkOut.whenReleased(new Fork(0));
-		} else {
-			// button map
-			upButton = new JoystickButton(joysticks[1], 5);
-			downButton = new JoystickButton(joysticks[1], 3);
-			forkIn = new JoystickButton(joysticks[1], 1);
-			forkOut = new JoystickButton(joysticks[1], 2);
-
-			upButton.whileHeld(new Lift(1));
-			downButton.whileHeld(new Lift(-1));
-
-			upButton.whenReleased(new Lift(0));
-			downButton.whenReleased(new Lift(0));
-
-			forkIn.whileHeld(new Fork(1));
-			forkOut.whileHeld(new Fork(-0.666));
-
-			forkIn.whenReleased(new Fork(0));
-			forkOut.whenReleased(new Fork(0));
-		}
 	}
 }
