@@ -16,8 +16,6 @@ public class LiftSystem extends Subsystem {
     public static DigitalInput limitSensorTop;
     public static DigitalInput limitSensorBot;
 
-    public static DigitalInput limitSensorFork;
-
     public LiftSystem() {
 		liftMotor = new CANTalon(RobotMap.liftMotor);
 		limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
