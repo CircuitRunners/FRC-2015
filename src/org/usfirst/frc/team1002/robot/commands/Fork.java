@@ -19,9 +19,9 @@ public class Fork extends Command {
      * forks.
      */
     public Fork(double speedIn) {
-	requires(Robot.forkSystem);
-	this.speed = speedIn;
-	this.timeout = 0;
+		requires(Robot.forkSystem);
+		this.speed = speedIn;
+		this.timeout = 0;
     }
 
     /**
@@ -32,36 +32,36 @@ public class Fork extends Command {
      * @param runTime The delay in seconds to stop the fork.
      */
     public Fork(double speedIn, double runTime) {
-	requires(Robot.forkSystem);
-	this.speed = speedIn;
-	this.timeout = runTime;
+		requires(Robot.forkSystem);
+		this.speed = speedIn;
+		this.timeout = runTime;
     }
 
     @Override
     protected void initialize() {
-	if (timeout != 0) {
-	    setTimeout(timeout);
-	}
+		if (timeout != 0) {
+		    setTimeout(timeout);
+		}
     }
 
     @Override
     protected void execute() {
-	ForkSystem.fork(this.speed);
+    	ForkSystem.fork(this.speed);
     }
 
     @Override
     protected boolean isFinished() {
-	if (timeout == 0) { return this.speed == 0; }
-	return this.speed == 0 || isTimedOut();
+		if (timeout == 0) { return this.speed == 0; }
+		return this.speed == 0 || isTimedOut();
     }
 
     @Override
     protected void end() {
-	ForkSystem.fork(0);
+    	ForkSystem.fork(0);
     }
 
     @Override
     protected void interrupted() {
-	ForkSystem.fork(0);
+    	ForkSystem.fork(0);
     }
 }

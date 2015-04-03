@@ -15,7 +15,7 @@ public class SetValues extends Command {
      * @param numbers The numbers to place on the dashboard.
      */
     public SetValues(double... numbers) {
-	Dashboard.publish(numbers);
+    	Dashboard.publish(numbers);
     }
 
     /**
@@ -24,7 +24,7 @@ public class SetValues extends Command {
      * @param strings The strings to place on the dashboard.
      */
     public SetValues(String... strings) {
-	Dashboard.publish(strings);
+    	Dashboard.publish(strings);
     }
 
     /**
@@ -33,7 +33,7 @@ public class SetValues extends Command {
      * @param booleans The booleans to place on the dashboard.
      */
     public SetValues(boolean... booleans) {
-	Dashboard.publish(booleans);
+    	Dashboard.publish(booleans);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SetValues extends Command {
 
     @Override
     protected boolean isFinished() {
-	return false;
+    	return false;
     }
 
     @Override

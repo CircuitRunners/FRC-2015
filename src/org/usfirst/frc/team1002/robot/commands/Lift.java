@@ -15,8 +15,8 @@ public class Lift extends Command {
      * @param speedIn The speed (-1 to 1) to lift the forklift.
      */
     public Lift(double speedIn) {
-	requires(Robot.liftSystem);
-	this.speed = speedIn;
+		requires(Robot.liftSystem);
+		this.speed = speedIn;
     }
 
     /**
@@ -26,36 +26,36 @@ public class Lift extends Command {
      * @param runTime The delay in seconds to stop the lift.
      */
     public Lift(double speedIn, double runTime) {
-	requires(Robot.liftSystem);
-	this.speed = speedIn;
-	this.timeout = runTime;
+		requires(Robot.liftSystem);
+		this.speed = speedIn;
+		this.timeout = runTime;
     }
 
     @Override
     protected void initialize() {
-	if (timeout != 0) {
-	    setTimeout(timeout);
-	}
+		if (timeout != 0) {
+		    setTimeout(timeout);
+		}
     }
 
     @Override
     protected void execute() {
-	LiftSystem.lift(this.speed);
+    	LiftSystem.lift(this.speed);
     }
 
     @Override
     protected boolean isFinished() {
-	if (timeout == 0) { return this.speed == 0; }
-	return this.speed == 0 || isTimedOut();
+		if (timeout == 0) { return this.speed == 0; }
+		return this.speed == 0 || isTimedOut();
     }
 
     @Override
     protected void end() {
-	LiftSystem.lift(0);
+    	LiftSystem.lift(0);
     }
 
     @Override
     protected void interrupted() {
-	LiftSystem.lift(0);
+    	LiftSystem.lift(0);
     }
 }

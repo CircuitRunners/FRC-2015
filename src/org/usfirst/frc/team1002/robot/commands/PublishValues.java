@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PublishValues extends Command {
 
     public PublishValues() {
-	requires(Robot.dash);
+    	requires(Robot.dash);
     }
 
     @Override
@@ -20,12 +20,12 @@ public class PublishValues extends Command {
 
     @Override
     protected void execute() {
-	Dashboard.publish("Project Fizz, lel");
+    	Dashboard.publish("Project Fizz, lel");
     }
 
     @Override
     protected boolean isFinished() {
-	return false;
+    	return false;
     }
 
     @Override

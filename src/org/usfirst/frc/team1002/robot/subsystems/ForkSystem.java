@@ -21,18 +21,18 @@ public class ForkSystem extends Subsystem {
     public static DigitalInput limitSensorFork;
 
     public ForkSystem() {
-	forkMotor = new Talon(RobotMap.forkMotor);
-	limitSensorFork = new DigitalInput(RobotMap.limitSwitches[2]);
-	fork(0);
+		forkMotor = new Talon(RobotMap.forkMotor);
+		limitSensorFork = new DigitalInput(RobotMap.limitSwitches[2]);
+		fork(0);
     }
 
     @Override
     public void initDefaultCommand() {
-	setDefaultCommand(new Fork(0));
+    	setDefaultCommand(new Fork(0));
     }
 
     public static void fork(double speed) {
-	if (!limitSensorFork.get() && speed < 0 && !Dashboard.getButton(1)) speed = 0;
-	forkMotor.set(speed);
+		if (!limitSensorFork.get() && speed < 0 && !Dashboard.getButton(1)) speed = 0;
+		forkMotor.set(speed);
     }
 }

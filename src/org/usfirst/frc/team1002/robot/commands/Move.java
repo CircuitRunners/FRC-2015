@@ -24,11 +24,11 @@ public class Move extends Command {
      * @param rotationIn The speed to rotate.
      */
     public Move(double xIn, double yIn, double rotationIn) {
-	requires(Robot.drive);
-	x = xIn;
-	y = yIn;
-	rotation = rotationIn;
-	cartesian = false;
+		requires(Robot.drive);
+		x = xIn;
+		y = yIn;
+		rotation = rotationIn;
+		cartesian = false;
     }
 
     /**
@@ -40,11 +40,11 @@ public class Move extends Command {
      * @param cartesian Use cartesian instead of polar.
      */
     public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn) {
-	requires(Robot.drive);
-	x = xIn;
-	y = yIn;
-	rotation = rotationIn;
-	cartesian = cartesianIn;
+		requires(Robot.drive);
+		x = xIn;
+		y = yIn;
+		rotation = rotationIn;
+		cartesian = cartesianIn;
     }
 
     /**
@@ -57,12 +57,12 @@ public class Move extends Command {
      * @param timeOut The delay in seconds to stop moving.
      */
     public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn, double runTime) {
-	requires(Robot.drive);
-	x = xIn;
-	y = yIn;
-	rotation = rotationIn;
-	cartesian = cartesianIn;
-	timeout = runTime;
+		requires(Robot.drive);
+		x = xIn;
+		y = yIn;
+		rotation = rotationIn;
+		cartesian = cartesianIn;
+		timeout = runTime;
     }
 
     /**
@@ -74,39 +74,39 @@ public class Move extends Command {
      * @param timeOut The delay in seconds to stop moving.
      */
     public Move(double xIn, double yIn, double rotationIn, double runTime) {
-	requires(Robot.drive);
-	x = xIn;
-	y = yIn;
-	rotation = rotationIn;
-	cartesian = false;
-	timeout = runTime;
+		requires(Robot.drive);
+		x = xIn;
+		y = yIn;
+		rotation = rotationIn;
+		cartesian = false;
+		timeout = runTime;
     }
 
     @Override
     protected void initialize() {
-	if (timeout != 0) {
-	    setTimeout(timeout);
-	}
+		if (timeout != 0) {
+		    setTimeout(timeout);
+		}
     }
 
     @Override
     protected void execute() {
-	Drive.move(x, y, rotation, cartesian);
+    	Drive.move(x, y, rotation, cartesian);
     }
 
     @Override
     protected boolean isFinished() {
-	if (timeout == 0) { return x == 0 && y == 0 && rotation == 0; }
-	return (x == 0 && y == 0 && rotation == 0) || isTimedOut();
+		if (timeout == 0) { return x == 0 && y == 0 && rotation == 0; }
+		return (x == 0 && y == 0 && rotation == 0) || isTimedOut();
     }
 
     @Override
     protected void end() {
-	Drive.move(0, 0, 0);
+    	Drive.move(0, 0, 0);
     }
 
     @Override
     protected void interrupted() {
-	Drive.move(0, 0, 0);
+    	Drive.move(0, 0, 0);
     }
 }

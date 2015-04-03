@@ -19,19 +19,19 @@ public class LiftSystem extends Subsystem {
     public static DigitalInput limitSensorFork;
 
     public LiftSystem() {
-	liftMotor = new CANTalon(RobotMap.liftMotor);
-	limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
-	limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
-	lift(0);
+		liftMotor = new CANTalon(RobotMap.liftMotor);
+		limitSensorTop = new DigitalInput(RobotMap.limitSwitches[0]);
+		limitSensorBot = new DigitalInput(RobotMap.limitSwitches[1]);
+		lift(0);
     }
 
     @Override
     public void initDefaultCommand() {
-	setDefaultCommand(new Lift(0));
+    	setDefaultCommand(new Lift(0));
     }
 
     public static void lift(double speed) {
-	if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
-	liftMotor.set(speed);
+		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
+		liftMotor.set(speed);
     }
 }

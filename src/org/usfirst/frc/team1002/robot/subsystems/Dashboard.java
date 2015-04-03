@@ -10,30 +10,30 @@ public class Dashboard extends Subsystem {
     }
 
     public static void publish(double... numbers) {
-	int key = 0;
-	for (final double value : numbers) {
-	    SmartDashboard.putNumber("DB/Slider " + key, value);
-	    key++;
-	}
+		int key = 0;
+		for (final double value : numbers) {
+		    SmartDashboard.putNumber("DB/Slider " + key, value);
+		    key++;
+		}
     }
 
     public static void publish(String... strings) {
-	int key = 0;
-	for (final String value : strings) {
-	    SmartDashboard.putString("DB/String " + key, value);
-	    key++;
-	}
+		int key = 0;
+		for (final String value : strings) {
+		    SmartDashboard.putString("DB/String " + key, value);
+		    key++;
+		}
     }
 
     public static void publish(boolean... booleans) {
-	int key = 0;
-	for (final boolean value : booleans) {
-	    SmartDashboard.putBoolean("DB/LED " + key, value);
-	    key++;
-	}
+		int key = 0;
+		for (final boolean value : booleans) {
+		    SmartDashboard.putBoolean("DB/LED " + key, value);
+		    key++;
+		}
     }
 
     public static boolean getButton(int number) {
-	return SmartDashboard.getBoolean("DB/Button " + number);
+    	return SmartDashboard.getBoolean("DB/Button " + number);
     }
 }
