@@ -21,8 +21,7 @@ public class PublishValues extends Command {
 
     @Override
     protected void execute() {
-	Dashboard.publish(((Double) Robot.joystickMove.getX()).toString(), ((Double) Robot.joystickMove.getY()).toString(),
-		((Double) Robot.joystickMove.getTwist()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
+	Dashboard.publish(((Double) Robot.joystickMove.getThrottle()).toString(), ((Boolean) Forklift.limitSensorBot.get()).toString(),
 		((Boolean) Forklift.limitSensorTop.get()).toString(), ((Boolean) Forklift.limitSensorFork.get()).toString());
     }
 

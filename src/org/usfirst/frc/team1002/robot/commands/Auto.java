@@ -27,45 +27,8 @@ public class Auto extends Command {
     protected void execute() {
 	double time;
 	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 1) {
-	    Drive.move(0, -0.25, 0);
-	}
-	Drive.move(0, 0, 0);
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.forkMotor.set(1);
-	}
-	Forklift.forkMotor.set(0);
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 0.5) {
-	    Forklift.liftMotor.set(1);
-	}
-	Forklift.liftMotor.set(0);
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 2) {
-	    Drive.move(0, 0.5, 0);
-	}
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 0.1) {
-	    Drive.move(0, 0, 0);
-	}
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 1) {
-	    Drive.move(0, 0, 0.5);
-	}
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.liftMotor.set(-1);
-	}
-	Forklift.liftMotor.set(0);
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 0.25) {
-	    Forklift.forkMotor.set(-1);
-	}
-	Forklift.forkMotor.set(0);
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 1) {
-	    Drive.move(0, 0.25, 0);
+	while (Timer.getFPGATimestamp() - time < 4) {
+	    Drive.move(0.3, 0, 0);
 	}
     }
 
