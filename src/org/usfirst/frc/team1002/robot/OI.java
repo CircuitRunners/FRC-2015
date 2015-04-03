@@ -45,8 +45,8 @@ public class OI {
 		forkInButton.whenReleased(new Fork(0));
 		forkOutButton.whenReleased(new Fork(0));
 
-		extGrabButton.whileHeld(new ExtArm(0.5));
-		extThrowButton.whileHeld(new ExtArm(-0.5));
+		extGrabButton.whileHeld(new ExtArm(0.75));
+		extThrowButton.whileHeld(new ExtArm(-0.75));
 
 		extGrabButton.whenReleased(new ExtArm(0));
 		extThrowButton.whenReleased(new ExtArm(0));

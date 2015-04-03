@@ -1,28 +1,81 @@
 package org.usfirst.frc.team1002.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1002.robot.Robot;
+import org.usfirst.frc.team1002.robot.subsystems.Drive;
+import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
+import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
-public class Auto extends CommandGroup {
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 
-	/**
-	 * Run a autonomous mode from multiple set modes.
-	 *
-	 * @param mode The autonomous mode to use.
-	 */
-	public Auto(int mode) {
-		switch (mode) {
-			default:
-				addParallel(new Lift(-1));
-				addParallel(new Fork(-1));
-				addSequential(new Move(0, -0.25, 0, true), 1);
-				addSequential(new Fork(1), 0.25);
-				addSequential(new Lift(1), 0.5);
-				addSequential(new Move(0, 0.5, 0, true), 1);
-				addParallel(new Move(0, 0, 0.5), 1);
-				addParallel(new Lift(-1), 0.25);
-				addSequential(new Fork(-1), 0.25);
-				addSequential(new Move(0, 0.25, 0), 1);
-				break;
-		}
+/**
+ *
+ */
+public class Auto extends Command {
+
+	public Auto() {
+		requires(Robot.drive);
+		requires(Robot.forkSystem);
+		requires(Robot.liftSystem);
+	}
+
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		double time;
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 1)
+			Drive.move(0, -0.25, 0);
+		Drive.move(0, 0, 0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 0.25)
+			ForkSystem.forkMotor.set(1);
+		ForkSystem.forkMotor.set(0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 0.5)
+			LiftSystem.liftMotor.set(1);
+		LiftSystem.liftMotor.set(0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 2)
+			Drive.move(0, 0.5, 0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 0.1)
+			Drive.move(0, 0, 0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 1)
+			Drive.move(0, 0, 0.5);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 0.25)
+			LiftSystem.liftMotor.set(-1);
+		LiftSystem.liftMotor.set(0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 0.25)
+			ForkSystem.forkMotor.set(-1);
+		ForkSystem.forkMotor.set(0);
+		time = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - time < 1)
+			Drive.move(0, 0.25, 0);
+	}
+
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
 	}
 }

@@ -9,7 +9,7 @@ import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
@@ -31,11 +31,10 @@ public class Robot extends IterativeRobot {
 	public static AxisCamera camera;
 
 	// Auto
-	CommandGroup auto;
+	Command auto;
 
 	@Override
 	public void autonomousInit() {
-		auto = new Auto((int) Math.floor(Dashboard.getNumber(0)));
 		Scheduler.getInstance().add(auto);
 	}
 
@@ -51,13 +50,14 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
+		auto = new Auto();
 		oi = new OI(joystickMove);
 		camera = new AxisCamera("10.10.2.11");
 	}
 
 	@Override
 	public void teleopInit() {
-		if (!auto.isCanceled() && auto != null) auto.cancel();
+		// if (!auto.isCanceled() && auto != null) auto.cancel();
 	}
 
 	@Override
