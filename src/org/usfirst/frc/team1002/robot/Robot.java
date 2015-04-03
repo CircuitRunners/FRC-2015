@@ -34,9 +34,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-	oi = new OI(joystickMove, joystickFork);
+	oi = new OI(joystickFork);
 	camera = new AxisCamera("10.10.2.11");
-	auto = new Auto();
     }
 
     @Override
@@ -46,6 +45,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+    auto = new Auto((int) (Math.floor(Dashboard.getNumber(0))));
 	Scheduler.getInstance().add(auto);
     }
 

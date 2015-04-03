@@ -7,17 +7,25 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
+	// buttons
     JoystickButton upButton;
     JoystickButton downButton;
     JoystickButton forkIn;
     JoystickButton forkOut;
 
-    public OI(GenericHID... joystick) {
-		upButton = new JoystickButton(joystick[1], 5);
-		downButton = new JoystickButton(joystick[1], 3);
-		forkIn = new JoystickButton(joystick[1], 1);
-		forkOut = new JoystickButton(joystick[1], 2);
+    /**
+     * Receive a joystick and then map controls to it.
+     * 
+     * @param joysticks The joysticks used for buttons
+     */
+    public OI(GenericHID... joysticks) {
+    	// button map
+		upButton = new JoystickButton(joysticks[0], 5);
+		downButton = new JoystickButton(joysticks[0], 3);
+		forkIn = new JoystickButton(joysticks[0], 1);
+		forkOut = new JoystickButton(joysticks[0], 2);
 		
+		// button controls
 		upButton.whileHeld(new Lift(1));
 		downButton.whileHeld(new Lift(-1));
 

@@ -33,7 +33,11 @@ public class Dashboard extends Subsystem {
 		}
     }
 
-    public static boolean getButton(int number) {
-    	return SmartDashboard.getBoolean("DB/Button " + number);
+    public static boolean getButton(int index) {
+    	return SmartDashboard.getBoolean("DB/Button " + index, false);
+    }
+    
+    public static double getNumber(int index) {
+    	return SmartDashboard.getNumber("DB/Slider " + index, 0);
     }
 }
