@@ -1,14 +1,25 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
+import org.usfirst.frc.team1002.robot.commands.PublishValues;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * @author mastercoms
+ */
 public class Dashboard extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
+	setDefaultCommand(new PublishValues());
     }
 
+    /**
+     * Publish numbers to Dashboard
+     * 
+     * @param numbers are the numbers to place on the dashboard
+     */
     public static void publish(double... numbers) {
 	int key = 0;
 	for (final double value : numbers) {
@@ -17,6 +28,11 @@ public class Dashboard extends Subsystem {
 	}
     }
 
+    /**
+     * Publish strings to Dashboard
+     * 
+     * @param strings are the strings to place on the dashboard
+     */
     public static void publish(String... strings) {
 	int key = 0;
 	for (final String value : strings) {
@@ -25,6 +41,11 @@ public class Dashboard extends Subsystem {
 	}
     }
 
+    /**
+     * Publish booleans to Dashboard
+     * 
+     * @param booleans are the booleans to place on the dashboard
+     */
     public static void publish(boolean... booleans) {
 	int key = 0;
 	for (final boolean value : booleans) {

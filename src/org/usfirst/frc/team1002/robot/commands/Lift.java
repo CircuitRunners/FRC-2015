@@ -1,61 +1,45 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
+import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Lift extends Command {
+
     private double speed;
-    private double timeout;
 
-    /**
-     * Lifts forklift.
-     *
-     * @param speedIn The speed (-1 to 1) to lift the forklift.
-     */
     public Lift(double speedIn) {
-	requires(Robot.liftSystem);
+	requires(Robot.forklift);
 	this.speed = speedIn;
-    }
-
-    /**
-     * Lifts forklift.
-     *
-     * @param speedIn The speed (-1 to 1) to lift the forklift.
-     * @param runTime The delay in seconds to stop the lift.
-     */
-    public Lift(double speedIn, double runTime) {
-	requires(Robot.liftSystem);
-	this.speed = speedIn;
-	this.timeout = runTime;
     }
 
     @Override
     protected void initialize() {
-	if (timeout != 0) {
-	    setTimeout(timeout);
-	}
     }
 
+    // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-	LiftSystem.lift(this.speed);
+	Forklift.lift(this.speed);
     }
 
+    // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-	if (timeout == 0) { return this.speed == 0; }
-	return this.speed == 0 || isTimedOut();
+	return this.speed == 0;
     }
 
+    // Called once after isFinished returns true
     @Override
     protected void end() {
-	LiftSystem.lift(0);
+	Forklift.lift(0);
     }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-	LiftSystem.lift(0);
+	Forklift.lift(0);
     }
 }
