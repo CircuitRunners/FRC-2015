@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-	oi = new OI(joystickFork);
+	oi = new OI(joystickMove, joystickFork);
 	camera = new AxisCamera("10.10.2.11");
     }
 
