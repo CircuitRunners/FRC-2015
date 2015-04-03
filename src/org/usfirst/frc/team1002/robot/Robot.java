@@ -45,8 +45,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-    auto = new Auto((int) (Math.floor(Dashboard.getNumber(0))));
-	Scheduler.getInstance().add(auto);
+	    auto = new Auto((int) (Math.floor(Dashboard.getNumber(0))));
+		Scheduler.getInstance().add(auto);
     }
 
     @Override
@@ -63,6 +63,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
 	Scheduler.getInstance().run();
 	Drive.move(joystickMove);
+	// oi.override();
     }
 
     @Override
