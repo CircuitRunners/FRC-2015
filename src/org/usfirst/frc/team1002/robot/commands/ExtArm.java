@@ -17,7 +17,7 @@ public class ExtArm extends Command {
 
 	@Override
 	protected void end() {
-		ForkSystem.fork(0);
+		ExtArmSystem.arm(0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
