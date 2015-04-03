@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
+import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,39 +10,58 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Fork extends Command {
     private double speed;
+    private double timeout;
 
+    /**
+     * Opens or closes the forks.
+     * 
+     * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+     * forks.
+     */
     public Fork(double speedIn) {
-	requires(Robot.forklift);
+	requires(Robot.forkSystem);
 	this.speed = speedIn;
+	this.timeout = 0;
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Opens or closes the forks.
+     * 
+     * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+     * forks.
+     * @param runTime The delay in seconds to stop the fork.
+     */
+    public Fork(double speedIn, double runTime) {
+	requires(Robot.forkSystem);
+	this.speed = speedIn;
+	this.timeout = runTime;
+    }
+
     @Override
     protected void initialize() {
+	if (timeout != 0) {
+	    setTimeout(timeout);
+	}
     }
 
-    // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-	Forklift.fork(this.speed);
+	ForkSystem.fork(this.speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-	return this.speed == 0;
+	if (timeout == 0) { return this.speed == 0; }
+	return this.speed == 0 || isTimedOut();
     }
 
-    // Called once after isFinished returns true
     @Override
     protected void end() {
-	Forklift.fork(0);
+	ForkSystem.fork(0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-	Forklift.fork(0);
+	ForkSystem.fork(0);
     }
 }

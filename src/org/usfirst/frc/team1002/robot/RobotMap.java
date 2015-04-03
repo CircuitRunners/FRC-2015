@@ -9,9 +9,6 @@ public class RobotMap {
     public static final int gyro = 0;
     // limit switches
     public static final int[] limitSwitches = { 8, 9, 7 };
-    // encoders
-    // public static final int[][] encoders = { { 0, 1 }, { 2, 3 }, { 4, 5 }, {
-    // 6, 7 } };
     // lift motor
     public static final int liftMotor = 0;
     // fork motor

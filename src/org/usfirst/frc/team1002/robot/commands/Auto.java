@@ -1,51 +1,22 @@
 package org.usfirst.frc.team1002.robot.commands;
 
-import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Drive;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
-
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Auto extends Command {
+public class Auto extends CommandGroup {
 
     public Auto() {
-	requires(Robot.drive);
-	requires(Robot.forklift);
-    }
-
-    // Called just before this Command runs the first time
-    @Override
-    protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {
-	double time;
-	time = Timer.getFPGATimestamp();
-	while (Timer.getFPGATimestamp() - time < 4) {
-	    Drive.move(0.3, 0, 0);
-	}
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-	return true;
-    }
-
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
+	addParallel(new Lift(-1));
+	addParallel(new Fork(-1));
+	addSequential(new Move(0, -0.25, 0, true), 1);
+	addSequential(new Fork(1), 0.25);
+	addSequential(new Lift(1), 0.5);
+	addSequential(new Move(0, 0.5, 0, true), 1);
+	addParallel(new Move(0, 0, 0.5), 1);
+	addParallel(new Lift(-1), 0.25);
+	addSequential(new Fork(-1), 0.25);
+	addSequential(new Move(0, 0.25, 0), 1);
     }
 }
