@@ -44,8 +44,9 @@ public class Drive extends Subsystem {
 	 * 
 	 * @param joystick is the joystick used
 	 */
-	public static void move(GenericHID joystick) {
-		robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
+	public static void move(GenericHID joystick, boolean isReversed) {
+		if (!isReversed) robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
+		else robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 180);
 	}
 
 	private static double spinThrottle(double input) {

@@ -15,6 +15,7 @@ public class OI {
 	JoystickButton forkOutButton;
 	JoystickButton extGrabButton;
 	JoystickButton extThrowButton;
+	JoystickButton reverseButton;
 	GenericHID[] joysticks;
 
 	/**
@@ -31,6 +32,7 @@ public class OI {
 		forkOutButton = new JoystickButton(joysticks[0], 2);
 		extGrabButton = new JoystickButton(joysticks[0], 6);
 		extThrowButton = new JoystickButton(joysticks[0], 4);
+		reverseButton = new JoystickButton(joysticks[0], 12);
 
 		// button controls
 		liftUpButton.whileHeld(new Lift(1));
