@@ -3,20 +3,15 @@ package org.usfirst.frc.team1002.robot.commands;
 import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class Lift extends Command {
-	private final double speed;
-	private double timeout;
-
+public class Lift extends MotorCommand {
 	/**
 	 * Lifts forklift.
 	 *
 	 * @param speedIn The speed (-1 to 1) to lift the forklift.
 	 */
 	public Lift(double speedIn) {
+		super("Fork", speedIn);
 		requires(Robot.liftSystem);
-		speed = speedIn;
 	}
 
 	/**
@@ -26,9 +21,8 @@ public class Lift extends Command {
 	 * @param runTime The delay in seconds to stop the lift.
 	 */
 	public Lift(double speedIn, double runTime) {
+		super("Fork", speed, runTime);
 		requires(Robot.liftSystem);
-		speed = speedIn;
-		timeout = runTime;
 	}
 
 	@Override
@@ -38,12 +32,11 @@ public class Lift extends Command {
 
 	@Override
 	protected void execute() {
-		LiftSystem.lift(speed);
+		LiftSystem.lift(getSpeed());
 	}
 
 	@Override
 	protected void initialize() {
-		if (timeout != 0) setTimeout(timeout);
 	}
 
 	@Override
@@ -53,7 +46,6 @@ public class Lift extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (timeout == 0) return speed == 0;
-		return speed == 0 || isTimedOut();
+		return super.isFinished()
 	}
 }

@@ -3,35 +3,28 @@ package org.usfirst.frc.team1002.robot.commands;
 import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class Fork extends Command {
-	private final double speed;
-	private final double timeout;
-
+public class Fork extends MotorCommand {
 	/**
 	 * Opens or closes the forks.
-	 * 
+	 *
 	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
 	 * forks.
 	 */
-	public Fork(double speedIn) {
+	public Fork(double speed) {
+		super("Fork", speed);
 		requires(Robot.forkSystem);
-		speed = speedIn;
-		timeout = 0;
 	}
 
 	/**
 	 * Opens or closes the forks.
-	 * 
+	 *
 	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
 	 * forks.
 	 * @param runTime The delay in seconds to stop the fork.
 	 */
-	public Fork(double speedIn, double runTime) {
+	public Fork(double speed, double runTime) {
+		super("Fork", speed, runTime);
 		requires(Robot.forkSystem);
-		speed = speedIn;
-		timeout = runTime;
 	}
 
 	@Override
@@ -41,12 +34,11 @@ public class Fork extends Command {
 
 	@Override
 	protected void execute() {
-		ForkSystem.fork(speed);
+		ForkSystem.fork(getSpeed());
 	}
 
 	@Override
 	protected void initialize() {
-		if (timeout != 0) setTimeout(timeout);
 	}
 
 	@Override
@@ -56,7 +48,6 @@ public class Fork extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (timeout == 0) return speed == 0;
-		return speed == 0 || isTimedOut();
+		return super.isFinished();
 	}
 }
