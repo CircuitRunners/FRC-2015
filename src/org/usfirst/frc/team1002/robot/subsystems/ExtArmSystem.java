@@ -10,8 +10,8 @@ public class ExtArmSystem extends Subsystem {
 
 	private static Talon extMotor;
 
-	public static void arm(double speedIn) {
-		extMotor.set(speedIn);
+	public static void arm(double speed) {
+		extMotor.set(speed);
 	}
 
 	public ExtArmSystem() {

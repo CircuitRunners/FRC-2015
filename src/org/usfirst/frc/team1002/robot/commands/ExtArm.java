@@ -4,15 +4,16 @@ import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.ExtArmSystem;
 import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class ExtArm extends MotorCommand {
 
-public class ExtArm extends Command {
-
-	public double speed;
-
-	public ExtArm(double speedIn) {
+	public ExtArm(double speed) {
+		super("ExtArm", speed);
 		requires(Robot.extArmSystem);
-		speed = speedIn;
+	}
+
+	public ExtArm(double speed, double runTime) {
+		super("ExtArm", speed, runTime);
+		requires(Robot.extArmSystem);
 	}
 
 	@Override
@@ -23,7 +24,7 @@ public class ExtArm extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		ExtArmSystem.arm(speed);
+		ExtArmSystem.arm(getSpeed());
 	}
 
 	@Override
@@ -37,6 +38,6 @@ public class ExtArm extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return super.isFinished();
 	}
 }

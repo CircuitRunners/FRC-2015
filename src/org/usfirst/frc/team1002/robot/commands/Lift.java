@@ -10,7 +10,7 @@ public class Lift extends MotorCommand {
 	 * @param speedIn The speed (-1 to 1) to lift the forklift.
 	 */
 	public Lift(double speed) {
-		super("Fork", speed);
+		super("Lift", speed);
 		requires(Robot.liftSystem);
 	}
 
@@ -21,7 +21,7 @@ public class Lift extends MotorCommand {
 	 * @param runTime The delay in seconds to stop the lift.
 	 */
 	public Lift(double speed, double runTime) {
-		super("Fork", speed, runTime);
+		super("Lift", speed, runTime);
 		requires(Robot.liftSystem);
 	}
 
