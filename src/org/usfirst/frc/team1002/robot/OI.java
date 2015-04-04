@@ -3,6 +3,7 @@ package org.usfirst.frc.team1002.robot;
 import org.usfirst.frc.team1002.robot.commands.ExtArm;
 import org.usfirst.frc.team1002.robot.commands.Fork;
 import org.usfirst.frc.team1002.robot.commands.Lift;
+import org.usfirst.frc.team1002.robot.commands.ReverseDrive;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -52,5 +53,7 @@ public class OI {
 
 		extGrabButton.whenReleased(new ExtArm(0));
 		extThrowButton.whenReleased(new ExtArm(0));
+
+		reverseButton.whenPressed(new ReverseDrive());
 	}
 }

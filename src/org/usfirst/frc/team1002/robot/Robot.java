@@ -63,8 +63,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		Drive.move(joystickMove, oi.reverseButton.get());
-		// oi.override();
+		Drive.move(joystickMove);
 	}
 
 	@Override

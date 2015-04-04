@@ -27,6 +27,16 @@ public class Drive extends Subsystem {
 	public static final double SPIN_DEADZONE_CONSTANT = 0.1;
 	public static final double STICK_DEADZONE_CONSTANT = 0.15;
 
+	// toggle drive reverse
+	public static boolean threeChainz5Me = false;
+
+	/**
+	 * Alternate move function. Takes joystick input and automatically throttles
+	 * and sets.
+	 *
+	 * @param joystick is the joystick used
+	 */
+
 	public static void move(double x, double y, double rotation) {
 		robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
 	}
@@ -38,15 +48,11 @@ public class Drive extends Subsystem {
 			robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
 	}
 
-	/**
-	 * Alternate move function. Takes joystick input and automatically throttles
-	 * and sets.
-	 * 
-	 * @param joystick is the joystick used
-	 */
-	public static void move(GenericHID joystick, boolean isReversed) {
-		if (!isReversed) robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
-		else robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 180);
+	public static void move(GenericHID joystick) {
+		if (!threeChainz5Me)
+			robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
+		else
+			robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 180);
 	}
 
 	private static double spinThrottle(double input) {
@@ -57,6 +63,10 @@ public class Drive extends Subsystem {
 	private static double throttle(double input) {
 		if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) return 0;
 		return input * ((-Robot.joystickMove.getThrottle() + 1) / 2);
+	}
+
+	public static void toggle() {
+		threeChainz5Me = !threeChainz5Me;
 	}
 
 	public Drive() {
