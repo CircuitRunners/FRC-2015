@@ -1,45 +1,51 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class Lift extends MotorCommand {
 
-public class Lift extends Command {
+	/**
+	 * Lifts forklift.
+	 *
+	 * @param speed The speed (-1 to 1) to lift the forklift.
+	 */
+	public Lift(double speed) {
+		super("Lift", speed);
+		requires(Robot.liftSystem);
+	}
 
-    private double speed;
+	/**
+	 * Lifts forklift.
+	 *
+	 * @param speed The speed (-1 to 1) to lift the forklift.
+	 * @param timeout The delay in seconds to stop the lift.
+	 */
+	public Lift(double speed, double timeout) {
+		super("Lift", speed, timeout);
+		requires(Robot.liftSystem);
+	}
 
-    public Lift(double speedIn) {
-	requires(Robot.forklift);
-	this.speed = speedIn;
-    }
+	@Override
+	protected void end() {
+		LiftSystem.lift(0);
+	}
 
-    @Override
-    protected void initialize() {
-    }
+	@Override
+	protected void execute() {
+		LiftSystem.lift(getSpeed());
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {
-	Forklift.lift(this.speed);
-    }
+	@Override
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-	return this.speed == 0;
-    }
+	@Override
+	protected void interrupted() {
+		LiftSystem.lift(0);
+	}
 
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-	Forklift.lift(0);
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
-	Forklift.lift(0);
-    }
+	@Override
+	protected boolean isFinished() {
+		return super.isFinished();
+	}
 }

@@ -1,33 +1,64 @@
 package org.usfirst.frc.team1002.robot;
 
+import org.usfirst.frc.team1002.robot.commands.ExtArm;
 import org.usfirst.frc.team1002.robot.commands.Fork;
 import org.usfirst.frc.team1002.robot.commands.Lift;
+import org.usfirst.frc.team1002.robot.commands.ReverseDrive;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
-    JoystickButton upButton;
-    JoystickButton downButton;
-    JoystickButton forkIn;
-    JoystickButton forkOut;
 
-    public OI(GenericHID... joystick) {
-		upButton = new JoystickButton(joystick[1], 5);
-		downButton = new JoystickButton(joystick[1], 3);
-		forkIn = new JoystickButton(joystick[1], 1);
-		forkOut = new JoystickButton(joystick[1], 2);
-		
-		upButton.whileHeld(new Lift(1));
-		downButton.whileHeld(new Lift(-1));
+	// buttons
+	JoystickButton liftUpButton;
+	JoystickButton liftDownButton;
+	JoystickButton forkInButton;
+	JoystickButton forkOutButton;
+	JoystickButton extGrabButton;
+	JoystickButton extThrowButton;
+	JoystickButton reverseButton;
+	GenericHID[] joysticks;
 
-		upButton.whenReleased(new Lift(0));
-		downButton.whenReleased(new Lift(0));
+	/**
+	 * Receive a joystick and then map controls to it.
+	 *
+	 * @param joysticks The joysticks used for buttons
+	 */
+	public OI(GenericHID... joysticks) {
+		this.joysticks = joysticks;
 
-		forkIn.whileHeld(new Fork(1));
-		forkOut.whileHeld(new Fork(-0.666));
+		// button map
+		liftUpButton = new JoystickButton(joysticks[0], 5);
+		liftDownButton = new JoystickButton(joysticks[0], 3);
 
-		forkIn.whenReleased(new Fork(0));
-		forkOut.whenReleased(new Fork(0));
-    }
+		forkInButton = new JoystickButton(joysticks[0], 1);
+		forkOutButton = new JoystickButton(joysticks[0], 2);
+
+		extGrabButton = new JoystickButton(joysticks[0], 6);
+		extThrowButton = new JoystickButton(joysticks[0], 4);
+
+		reverseButton = new JoystickButton(joysticks[0], 12);
+
+		// button controls
+		liftUpButton.whileHeld(new Lift(1));
+		liftDownButton.whileHeld(new Lift(-1));
+
+		liftUpButton.whenReleased(new Lift(0));
+		liftDownButton.whenReleased(new Lift(0));
+
+		forkInButton.whileHeld(new Fork(1));
+		forkOutButton.whileHeld(new Fork(-0.666));
+
+		forkInButton.whenReleased(new Fork(0));
+		forkOutButton.whenReleased(new Fork(0));
+
+		extGrabButton.whileHeld(new ExtArm(1));
+		extThrowButton.whileHeld(new ExtArm(-1));
+
+		extGrabButton.whenReleased(new ExtArm(0));
+		extThrowButton.whenReleased(new ExtArm(0));
+
+		reverseButton.whenPressed(new ReverseDrive());
+	}
 }

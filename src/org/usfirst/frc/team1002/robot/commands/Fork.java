@@ -1,48 +1,54 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
-import org.usfirst.frc.team1002.robot.subsystems.Forklift;
+import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class Fork extends MotorCommand {
 
-/**
- *
- */
-public class Fork extends Command {
-    private double speed;
+	/**
+	 * Opens or closes the forks.
+	 *
+	 * @param speed The speed (-1 to 1) at which to open (-) or close (+) the
+	 * forks.
+	 */
+	public Fork(double speed) {
+		super("Fork", speed);
+		requires(Robot.forkSystem);
+	}
 
-    public Fork(double speedIn) {
-	requires(Robot.forklift);
-	this.speed = speedIn;
-    }
+	/**
+	 * Opens or closes the forks.
+	 *
+	 * @param speed The speed (-1 to 1) at which to open (-) or close (+) the
+	 * forks.
+	 * @param timeout The delay in seconds to stop the fork.
+	 */
+	public Fork(double speed, double timeout) {
+		super("Fork", speed, timeout);
+		requires(Robot.forkSystem);
+	}
 
-    // Called just before this Command runs the first time
-    @Override
-    protected void initialize() {
-    }
+	@Override
+	protected void end() {
+		ForkSystem.fork(0);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {
-	Forklift.fork(this.speed);
-    }
+	@Override
+	protected void execute() {
+		ForkSystem.fork(getSpeed());
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-	return this.speed == 0;
-    }
+	@Override
+	protected void initialize() {
+	}
 
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-	Forklift.fork(0);
-    }
+	@Override
+	protected void interrupted() {
+		ForkSystem.fork(0);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
-	Forklift.fork(0);
-    }
+	@Override
+	protected boolean isFinished() {
+		return super.isFinished();
+	}
 }
