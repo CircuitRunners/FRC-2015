@@ -3,6 +3,7 @@ package org.usfirst.frc.team1002.robot.commands;
 import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
+import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 

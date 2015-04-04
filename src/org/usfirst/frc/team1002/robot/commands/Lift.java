@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1002.robot.commands;
 
 import org.usfirst.frc.team1002.robot.Robot;
+import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
 public class Lift extends MotorCommand {
 
