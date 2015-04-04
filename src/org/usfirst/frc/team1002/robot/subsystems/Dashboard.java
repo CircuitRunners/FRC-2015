@@ -5,10 +5,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard extends Subsystem {
 
+	/**
+	 * Request a button value from a specified index and receive the boolean
+	 * value of that button.
+	 *
+	 * @param index The button in that place in the dashboard.
+	 * @return Returns the button value as a boolean.
+	 */
 	public static boolean getButton(int index) {
 		return SmartDashboard.getBoolean("DB/Button " + index, false);
 	}
 
+	/**
+	 * Request a slider from a specified index and receive the double value of
+	 * that button.
+	 *
+	 * @param index The slider in that place in the dashboard.
+	 * @return Returns the slider value as a double.
+	 */
 	public static double getNumber(int index) {
 		return SmartDashboard.getNumber("DB/Slider " + index, 0);
 	}

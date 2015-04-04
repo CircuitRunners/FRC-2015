@@ -10,24 +10,35 @@ public abstract class MotorCommand extends Command {
 	private final double speed;
 	private final boolean timed;
 
+	/**
+	 * Constructs a command involving a motor.
+	 *
+	 * @param name The name of the command.
+	 * @param speed The speed to set the motor to.
+	 */
 	public MotorCommand(String name, double speed) {
 		super(name);
 		this.speed = speed;
 		timed = false;
 	}
 
+	/**
+	 * Constructs a command involving a motor with a timeout.
+	 *
+	 * @param name The name of the command.
+	 * @param speed The speed to set the motor to.
+	 * @param timeout The delay in seconds to stop the motor.
+	 */
 	public MotorCommand(String name, double speed, double timeout) {
 		super(name, timeout);
 		this.speed = speed;
 		timed = true;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 	}
@@ -36,18 +47,14 @@ public abstract class MotorCommand extends Command {
 		return speed;
 	}
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		if (timed) return speed == 0 || isTimedOut();

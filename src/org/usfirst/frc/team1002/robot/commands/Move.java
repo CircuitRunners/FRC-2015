@@ -16,32 +16,32 @@ public class Move extends Command {
 	/**
 	 * Default move function. Polar is used.
 	 *
-	 * @param xIn The speed to move in the x-direction.
-	 * @param yIn The speed to move in the y-direction.
-	 * @param rotationIn The speed to rotate.
+	 * @param x The speed to move in the x-direction.
+	 * @param y The speed to move in the y-direction.
+	 * @param rotation The speed to rotate.
 	 */
-	public Move(double xIn, double yIn, double rotationIn) {
+	public Move(double x, double y, double rotation) {
 		requires(Robot.drive);
-		x = xIn;
-		y = yIn;
-		rotation = rotationIn;
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
 		cartesian = false;
 	}
 
 	/**
 	 * Default move function. Polar is used unless set.
 	 *
-	 * @param xIn The speed to move in the x-direction.
-	 * @param yIn The speed to move in the y-direction.
-	 * @param rotationIn The speed to rotate.
+	 * @param x The speed to move in the x-direction.
+	 * @param y The speed to move in the y-direction.
+	 * @param rotation The speed to rotate.
 	 * @param cartesian Use cartesian instead of polar.
 	 */
-	public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn) {
+	public Move(double x, double y, double rotation, boolean cartesian) {
 		requires(Robot.drive);
-		x = xIn;
-		y = yIn;
-		rotation = rotationIn;
-		cartesian = cartesianIn;
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
+		this.cartesian = cartesian;
 	}
 
 	/**
@@ -51,15 +51,15 @@ public class Move extends Command {
 	 * @param yIn The speed to move in the y-direction.
 	 * @param rotationIn The speed to rotate.
 	 * @param cartesian Use cartesian instead of polar.
-	 * @param timeOut The delay in seconds to stop moving.
+	 * @param timeout The delay in seconds to stop moving.
 	 */
-	public Move(double xIn, double yIn, double rotationIn, boolean cartesianIn, double runTime) {
+	public Move(double x, double y, double rotation, boolean cartesian, double timeout) {
 		requires(Robot.drive);
-		x = xIn;
-		y = yIn;
-		rotation = rotationIn;
-		cartesian = cartesianIn;
-		timeout = runTime;
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
+		this.cartesian = cartesian;
+		this.timeout = timeout;
 	}
 
 	/**

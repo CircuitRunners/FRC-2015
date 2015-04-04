@@ -10,6 +10,11 @@ public class ExtArmSystem extends Subsystem {
 
 	private static Talon extMotor;
 
+	/**
+	 * Internal extension arm speed setter. Use the ExtArm command instead.
+	 * 
+	 * @param speed Internal speed value.
+	 */
 	public static void arm(double speed) {
 		extMotor.set(speed);
 	}

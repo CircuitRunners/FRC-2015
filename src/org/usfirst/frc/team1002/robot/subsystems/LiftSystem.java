@@ -13,6 +13,11 @@ public class LiftSystem extends Subsystem {
 	public static DigitalInput limitSensorTop;
 	public static DigitalInput limitSensorBot;
 
+	/**
+	 * Internal lift speed setter. Use the Lift command instead.
+	 *
+	 * @param speed Internal speed value.
+	 */
 	public static void lift(double speed) {
 		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
 		liftMotor.set(speed);

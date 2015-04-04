@@ -20,26 +20,29 @@ public class Drive extends Subsystem {
 	// Gyro
 	public static Gyro gyro;
 
-	// RobotDrive
+	// Robot drive
 	public static RobotDrive robotDrive;
 
 	// Deadzone Constants
 	public static final double SPIN_DEADZONE_CONSTANT = 0.1;
 	public static final double STICK_DEADZONE_CONSTANT = 0.15;
 
-	// toggle drive reverse
+	// Backwards drive toggle
 	public static boolean toggle = false;
 
 	/**
 	 * Alternate move function. Takes joystick input and automatically throttles
 	 * and sets.
 	 *
-	 * @param joystick is the joystick used
+	 * @param joystick The joystick used.
 	 */
 	public static void move(double x, double y, double rotation) {
 		robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
 	}
 
+	/**
+	 * Internal move function. Use the move command instead.
+	 */
 	public static void move(double x, double y, double rotation, boolean cartesian) {
 		if (cartesian)
 			robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
@@ -51,7 +54,7 @@ public class Drive extends Subsystem {
 	 * Alternate move function. Takes joystick input and automatically throttles
 	 * and sets.
 	 *
-	 * @param joystick is the joystick used
+	 * @param joystick The joystick used.
 	 */
 	public static void move(GenericHID joystick) {
 		if (!toggle)

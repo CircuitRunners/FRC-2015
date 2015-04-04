@@ -7,7 +7,7 @@ public class Fork extends MotorCommand {
 	/**
 	 * Opens or closes the forks.
 	 *
-	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+	 * @param speed The speed (-1 to 1) at which to open (-) or close (+) the
 	 * forks.
 	 */
 	public Fork(double speed) {
@@ -18,12 +18,12 @@ public class Fork extends MotorCommand {
 	/**
 	 * Opens or closes the forks.
 	 *
-	 * @param speedIn The speed (-1 to 1) at which to open (-) or close (+) the
+	 * @param speed The speed (-1 to 1) at which to open (-) or close (+) the
 	 * forks.
-	 * @param runTime The delay in seconds to stop the fork.
+	 * @param timeout The delay in seconds to stop the fork.
 	 */
-	public Fork(double speed, double runTime) {
-		super("Fork", speed, runTime);
+	public Fork(double speed, double timeout) {
+		super("Fork", speed, timeout);
 		requires(Robot.forkSystem);
 	}
 

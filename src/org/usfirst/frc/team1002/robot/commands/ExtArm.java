@@ -6,13 +6,26 @@ import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 
 public class ExtArm extends MotorCommand {
 
+	/**
+	 * Manipulates the extension arm.
+	 *
+	 * @param speed The speed (-1 to 1) at which to extend (-) or bring in (+)
+	 * the extension arm.
+	 */
 	public ExtArm(double speed) {
 		super("ExtArm", speed);
 		requires(Robot.extArmSystem);
 	}
 
-	public ExtArm(double speed, double runTime) {
-		super("ExtArm", speed, runTime);
+	/**
+	 * Manipulates the extension arm.
+	 *
+	 * @param speed The speed (-1 to 1) at which to extend (-) or bring in (+)
+	 * the extension arm.
+	 * @param timeout The delay in seconds to stop the fork.
+	 */
+	public ExtArm(double speed, double timeout) {
+		super("ExtArm", speed, timeout);
 		requires(Robot.extArmSystem);
 	}
 
@@ -21,7 +34,6 @@ public class ExtArm extends MotorCommand {
 		ExtArmSystem.arm(0);
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		ExtArmSystem.arm(getSpeed());

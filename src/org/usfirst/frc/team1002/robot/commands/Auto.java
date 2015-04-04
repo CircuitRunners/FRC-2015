@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Auto extends CommandGroup {
 	/**
-	 * Run a autonomous mode from multiple set modes.
+	 * Runs an autonomous mode from one of multiple set modes.
 	 *
 	 * @param mode The autonomous mode to use.
 	 */

@@ -12,6 +12,11 @@ public class ForkSystem extends Subsystem {
 
 	public static DigitalInput limitSensorFork;
 
+	/**
+	 * Internal fork speed setter. Use the Fork command instead.
+	 *
+	 * @param speed Internal speed value.
+	 */
 	public static void fork(double speed) {
 		if (!limitSensorFork.get() && speed < 0 && !Dashboard.getButton(1)) speed = 0;
 		forkMotor.set(speed);
