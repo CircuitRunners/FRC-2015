@@ -28,7 +28,7 @@ public class Drive extends Subsystem {
 	public static final double STICK_DEADZONE_CONSTANT = 0.15;
 
 	// toggle drive reverse
-	public static boolean threeChainz5Me = false;
+	public static boolean toggle = false;
 
 	/**
 	 * Alternate move function. Takes joystick input and automatically throttles
@@ -49,7 +49,7 @@ public class Drive extends Subsystem {
 	}
 
 	public static void move(GenericHID joystick) {
-		if (!threeChainz5Me)
+		if (!toggle)
 			robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 0);
 		else
 			robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()), 180);
@@ -66,7 +66,7 @@ public class Drive extends Subsystem {
 	}
 
 	public static void toggle() {
-		threeChainz5Me = !threeChainz5Me;
+		toggle = !toggle;
 	}
 
 	public Drive() {
