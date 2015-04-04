@@ -19,7 +19,7 @@ public class PublishValues extends Command {
 
 	@Override
 	protected void execute() {
-		Dashboard.publish("Throttle", "Lift Limit Top", "Lift Limit Bot", "Fork Limit", "", ((Double) Robot.joystickMove.getThrottle()).toString(), ((Boolean) LiftSystem.limitSensorTop.get()).toString(), ((Boolean) LiftSystem.limitSensorBot.get()).toString(), ((Boolean) ForkSystem.limitSensorFork.get()).toString());
+		Dashboard.publish("Throttle", "Lift Limit Top", "Lift Limit Bot", "Fork Limit", "Autonomous Mode", ((Double) Robot.joystickMove.getThrottle()).toString(), ((Boolean) LiftSystem.limitSensorTop.get()).toString(), ((Boolean) LiftSystem.limitSensorBot.get()).toString(), ((Boolean) ForkSystem.limitSensorFork.get()).toString(), ((Double) Dashboard.getNumber(0)).toString());
 	}
 
 	@Override
