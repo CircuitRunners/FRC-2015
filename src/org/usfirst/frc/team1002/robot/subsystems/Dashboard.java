@@ -5,14 +5,35 @@ import org.usfirst.frc.team1002.robot.commands.PublishValues;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * @author mastercoms
- */
 public class Dashboard extends Subsystem {
+    /**
+     * Request a button value from a specified index and receive the boolean
+     * value of that button.
+     *
+     * @param index The button in that place in the dashboard.
+     * @return Returns the button value as a boolean.
+     */
+    public static boolean getButton(int index) {
+        return SmartDashboard.getBoolean("DB/Button " + index, false);
+    }
 
-    @Override
-    public void initDefaultCommand() {
-        setDefaultCommand(new PublishValues());
+    /**
+     * Request a slider from a specified index and receive the double value of
+     * that button.
+     *
+     * @param index The slider in that place in the dashboard.
+     * @return Returns the slider value as a double.
+     */
+    public static double getNumber(int index) {
+        return SmartDashboard.getNumber("DB/Slider " + index, 0);
+    }
+
+    public static void publish(boolean... booleans) {
+        int key = 0;
+        for (final boolean value : booleans) {
+            SmartDashboard.putBoolean("DB/LED " + key, value);
+            key++;
+        }
     }
 
     /**
@@ -28,11 +49,6 @@ public class Dashboard extends Subsystem {
         }
     }
 
-    /**
-     * Publish strings to Dashboard
-     *
-     * @param strings are the strings to place on the dashboard
-     */
     public static void publish(String... strings) {
         int key = 0;
         for (final String value : strings) {
@@ -41,20 +57,8 @@ public class Dashboard extends Subsystem {
         }
     }
 
-    /**
-     * Publish booleans to Dashboard
-     *
-     * @param booleans are the booleans to place on the dashboard
-     */
-    public static void publish(boolean... booleans) {
-        int key = 0;
-        for (final boolean value : booleans) {
-            SmartDashboard.putBoolean("DB/LED " + key, value);
-            key++;
-        }
-    }
-
-    public static boolean getButton(int number) {
-        return SmartDashboard.getBoolean("DB/Button " + number);
+    @Override
+    public void initDefaultCommand() {
+        setDefaultCommand(new PublishValues());
     }
 }
