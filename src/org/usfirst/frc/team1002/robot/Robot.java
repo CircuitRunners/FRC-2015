@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        auto = new Auto((int) Math.round(Dashboard.getNumber(0)));
+        auto = new Auto((int) Dashboard.getNumber(0));
         Scheduler.getInstance().add(auto);
         Scheduler.getInstance().add(publishDash);
     }
@@ -58,7 +58,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        // if (!auto.isCanceled() && auto != null) auto.cancel();
+        if (!auto.isCanceled() && auto != null) auto.cancel();
+        if (!publishDash.isCanceled() && publishDash != null) publishDash.cancel();
         Scheduler.getInstance().add(publishDash);
     }
 
