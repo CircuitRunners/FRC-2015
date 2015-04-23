@@ -1,9 +1,7 @@
 package org.usfirst.frc.team1002.robot.subsystems;
 
-import org.usfirst.frc.team1002.robot.Robot;
 import org.usfirst.frc.team1002.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -21,10 +19,6 @@ public class Drive extends Subsystem {
 
     // Robot drive
     public static RobotDrive robotDrive;
-
-    // Deadzone Constants
-    public static final double SPIN_DEADZONE_CONSTANT = 0.1;
-    public static final double STICK_DEADZONE_CONSTANT = 0.15;
 
     // Backwards drive toggle
     public static boolean toggle = false;
@@ -56,29 +50,17 @@ public class Drive extends Subsystem {
      *
      * @param joystick The joystick used.
      */
-    public static void move(GenericHID joystick) {
+    public static void move(JoystickController joystick) {
         if (!toggle) {
-            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()),
+            robotDrive.mecanumDrive_Cartesian(joystick.getX(true), joystick.getY(true), joystick.getTwist(true),
                     0);
         } else {
-            robotDrive.mecanumDrive_Cartesian(throttle(joystick.getX()), throttle(joystick.getY()), spinThrottle(joystick.getTwist()),
+            robotDrive.mecanumDrive_Cartesian(joystick.getX(true), joystick.getY(true), joystick.getTwist(true),
                     180);
         }
     }
 
-    private static double spinThrottle(double input) {
-        if (input > -SPIN_DEADZONE_CONSTANT && input < SPIN_DEADZONE_CONSTANT) {
-            return 0;
-        }
-        return input * ((-Robot.joystickMove.getThrottle() + 1) / 2) * 0.5;
-    }
-
-    private static double throttle(double input) {
-        if (input > -STICK_DEADZONE_CONSTANT && input < STICK_DEADZONE_CONSTANT) {
-            return 0;
-        }
-        return input * ((-Robot.joystickMove.getThrottle() + 1) / 2);
-    }
+    
 
     public static void toggle() {
         toggle = !toggle;

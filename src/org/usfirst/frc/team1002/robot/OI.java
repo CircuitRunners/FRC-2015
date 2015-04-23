@@ -17,7 +17,6 @@ public class OI {
     JoystickButton extGrabButton;
     JoystickButton extThrowButton;
     JoystickButton reverseButton;
-    GenericHID[] joysticks;
 
     /**
      * Receive a joystick and then map controls to it.
@@ -25,8 +24,6 @@ public class OI {
      * @param joysticks The joysticks used for buttons
      */
     public OI(GenericHID... joysticks) {
-        this.joysticks = joysticks;
-
         // button map
         liftUpButton = new JoystickButton(joysticks[0], 5);
         liftDownButton = new JoystickButton(joysticks[0], 3);
