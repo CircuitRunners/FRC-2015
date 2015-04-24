@@ -19,7 +19,7 @@ public class LiftSystem extends Subsystem {
 	 * @param speed Internal speed value.
 	 */
 	public static void lift(double speed) {
-		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0 && !Dashboard.getButton(0)) speed = 0;
+		if (limitSensorBot.get() && speed < 0 || limitSensorTop.get() && speed > 0) speed = 0;
 		liftMotor.set(speed);
 	}
 

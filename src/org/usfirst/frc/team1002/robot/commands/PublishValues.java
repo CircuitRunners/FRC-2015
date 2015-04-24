@@ -5,35 +5,25 @@ import org.usfirst.frc.team1002.robot.subsystems.Dashboard;
 import org.usfirst.frc.team1002.robot.subsystems.ForkSystem;
 import org.usfirst.frc.team1002.robot.subsystems.LiftSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class PublishValues {
+	public static void execute() {
+		Dashboard.publish("Throttle", "Lift Limit Top", "Lift Limit Bot", "Fork Limit", "Autonomous Mode", ((Double) Robot.joystickMove.getThrottle()).toString(), ((Boolean) LiftSystem.limitSensorTop.get()).toString(), ((Boolean) LiftSystem.limitSensorBot.get()).toString(), ((Boolean) ForkSystem.limitSensorFork.get()).toString(), ((Double) Dashboard.getNumber(0)).toString());
+	}
 
-public class PublishValues extends Command {
-    public PublishValues() {
-        requires(Robot.dash);
-    }
+	public PublishValues() {
+	}
 
-    @Override
-    protected void end() {
-    }
+	protected void end() {
+	}
 
-    @Override
-    protected void execute() {
-        Dashboard.publish("Throttle", "Lift Limit Top", "Lift Limit Bot", "Fork Limit", "Autonomous Mode",
-                ((Double) Robot.joystickMove.getThrottle()).toString(), ((Boolean) LiftSystem.limitSensorTop.get()).toString(),
-                ((Boolean) LiftSystem.limitSensorBot.get()).toString(), ((Boolean) ForkSystem.limitSensorFork.get()).toString(),
-                ((Double) Dashboard.getNumber(0)).toString());
-    }
+	protected void initialize() {
 
-    @Override
-    protected void initialize() {
-    }
+	}
 
-    @Override
-    protected void interrupted() {
-    }
+	protected void interrupted() {
+	}
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+	protected boolean isFinished() {
+		return false;
+	}
 }
