@@ -29,6 +29,7 @@ public class Robot extends IterativeRobot {
     public static OI oi;
     // Camera
     public static AxisCamera camera;
+    // Commands 
     private Command auto;
     private Command publishDash;
 
