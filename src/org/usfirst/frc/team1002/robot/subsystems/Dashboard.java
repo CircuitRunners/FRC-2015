@@ -35,7 +35,7 @@ public class Dashboard extends Subsystem {
 	}
 
 	/**
-	 * Publish numbers to Dashboard
+	 * Publish numbers to the Dashboard's next available key.
 	 *
 	 * @param numbers are the numbers to place on the dashboard
 	 */

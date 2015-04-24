@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 public class Robot extends IterativeRobot {
 
-	// Static instances of systems
+	// Static Instances of subsystems
 	public static final JoystickController joystickMove = new JoystickController(RobotMap.stick[0]);
 	public static final Drive drive = new Drive();
 	public static final ForkSystem forkSystem = new ForkSystem();
@@ -27,7 +27,6 @@ public class Robot extends IterativeRobot {
 
 	// Secondary handlers
 	public static OI oi;
-	// Camera
 	public static AxisCamera camera;
 	private Command auto;
 
@@ -51,13 +50,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI(joystickMove);
-		auto = new Auto(0);
 		camera = new AxisCamera("10.10.2.11");
 	}
 
 	@Override
 	public void teleopInit() {
-		if (!auto.isCanceled() && auto != null) auto.cancel();
 	}
 
 	@Override

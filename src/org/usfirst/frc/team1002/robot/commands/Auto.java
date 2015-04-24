@@ -12,7 +12,7 @@ public class Auto extends CommandGroup {
 	public Auto(int mode) {
 		switch (mode) {
 			case 1:
-				addSequential(new Move(-0.25, 0, 0), 2.5);
+				addSequential(new Move(-0.5, 0, 0), 2.5);
 				break;
 			case 2:
 				break;
@@ -26,10 +26,14 @@ public class Auto extends CommandGroup {
 				addSequential(new Fork(-1), 0.25);
 				addSequential(new Move(0, 0.25, 0), 1);
 				break;
+			case 4:
+				addSequential(new Move(-0.25, 0, 0.5), 1);
+				addSequential(new ExtArm(1), 1);
+				break;
 			default:
 				addSequential(new Move(0, -0.25, 0), 1);
-				addSequential(new ExtArm(1), 0.5);
-				addSequential(new ExtArm(-1), 0.5);
+				addSequential(new ExtArm(1), 1);
+				addSequential(new ExtArm(-1), 1);
 				addSequential(new Move(0, 0.25, 0), 1);
 				break;
 		}
