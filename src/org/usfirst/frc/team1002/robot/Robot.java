@@ -17,60 +17,58 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 public class Robot extends IterativeRobot {
 
-    // Static instances of systems
-    public static final JoystickController joystickMove = new JoystickController(RobotMap.stick[0]);
-    public static final Drive drive = new Drive();
-    public static final ForkSystem forkSystem = new ForkSystem();
-    public static final LiftSystem liftSystem = new LiftSystem();
-    public static final ExtArmSystem extArmSystem = new ExtArmSystem();
-    public static final Dashboard dash = new Dashboard();
+	// Static instances of systems
+	public static final JoystickController joystickMove = new JoystickController(RobotMap.stick[0]);
+	public static final Drive drive = new Drive();
+	public static final ForkSystem forkSystem = new ForkSystem();
+	public static final LiftSystem liftSystem = new LiftSystem();
+	public static final ExtArmSystem extArmSystem = new ExtArmSystem();
+	public static final Dashboard dash = new Dashboard();
 
-    // Secondary handlers
-    public static OI oi;
-    // Camera
-    public static AxisCamera camera;
-    private Command auto;
-    private Command publishDash;
+	// Secondary handlers
+	public static OI oi;
+	// Camera
+	public static AxisCamera camera;
+	private Command auto;
 
-    @Override
-    public void autonomousInit() {
-        auto = new Auto((int) Dashboard.getNumber(0));
-        Scheduler.getInstance().add(auto);
-        Scheduler.getInstance().add(publishDash);
-    }
+	@Override
+	public void autonomousInit() {
+		auto = new Auto((int) Dashboard.getNumber(0));
+		Scheduler.getInstance().add(auto);
+	}
 
-    @Override
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+		PublishValues.execute();
+	}
 
-    @Override
-    public void disabledPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void robotInit() {
-        oi = new OI(joystickMove);
-        camera = new AxisCamera("10.10.2.11");
-        publishDash = new PublishValues();
-    }
+	@Override
+	public void robotInit() {
+		oi = new OI(joystickMove);
+		auto = new Auto(0);
+		camera = new AxisCamera("10.10.2.11");
+	}
 
-    @Override
-    public void teleopInit() {
-        if (!auto.isCanceled() && auto != null) auto.cancel();
-        if (!publishDash.isCanceled() && publishDash != null) publishDash.cancel();
-        Scheduler.getInstance().add(publishDash);
-    }
+	@Override
+	public void teleopInit() {
+		if (!auto.isCanceled() && auto != null) auto.cancel();
+	}
 
-    @Override
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        Drive.move(joystickMove);
-    }
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		Drive.move(joystickMove);
+		PublishValues.execute();
+	}
 
-    @Override
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+	@Override
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }
